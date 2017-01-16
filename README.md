@@ -1,0 +1,2 @@
+# flexin
+Flexible inventory system 
