@@ -1,4 +1,4 @@
-package se.anyro.nfc_reader.data;
+package com.crystal.flexin.data;
 /**
  * Created by aymane on 22/03/17.
  */

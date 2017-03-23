@@ -1,4 +1,4 @@
-package se.anyro.nfc_reader.data;
+package com.crystal.flexin.data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

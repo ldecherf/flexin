@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package se.anyro.nfc_reader;
+package com.crystal.flexin;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -51,7 +51,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import se.anyro.nfc_reader.record.ParsedNdefRecord;
+import com.crystal.flexin.NdefMessageParser;
+import com.crystal.flexin.record.ParsedNdefRecord;
+
+import se.anyro.nfc_reader.R;
 
 /**
  * An {@link Activity} which handles a broadcast of a new tag that the device just discovered.

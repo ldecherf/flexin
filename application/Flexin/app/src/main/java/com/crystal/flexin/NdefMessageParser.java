@@ -13,15 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package se.anyro.nfc_reader;
+package com.crystal.flexin;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import se.anyro.nfc_reader.record.ParsedNdefRecord;
-import se.anyro.nfc_reader.record.SmartPoster;
-import se.anyro.nfc_reader.record.TextRecord;
-import se.anyro.nfc_reader.record.UriRecord;
+import com.crystal.flexin.record.ParsedNdefRecord;
+import com.crystal.flexin.record.SmartPoster;
+import com.crystal.flexin.record.TextRecord;
+import com.crystal.flexin.record.UriRecord;
 import android.app.Activity;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -29,6 +29,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import se.anyro.nfc_reader.R;
 
 /**
  * Utility class for creating {@link ParsedNdefMessage}s.

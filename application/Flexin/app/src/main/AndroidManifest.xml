@@ -30,7 +30,7 @@
       android:label="@string/app_name"
       android:allowBackup="true">
         <activity
-          android:name="TagViewer"
+          android:name="com.crystal.flexin.TagViewer"
           android:label="@string/app_name"
           android:screenOrientation="nosensor"
           android:alwaysRetainTaskState="true"

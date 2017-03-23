@@ -1,4 +1,4 @@
-package se.anyro.nfc_reader.data;
+package com.crystal.flexin.data;
 
 import
         org.junit.Test;

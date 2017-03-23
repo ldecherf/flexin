@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package se.anyro.nfc_reader.record;
+package com.crystal.flexin.record;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;

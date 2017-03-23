@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package se.anyro.nfc_reader.record;
+package com.crystal.flexin.record;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;

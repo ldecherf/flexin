@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package se.anyro.nfc_reader.record;
+package com.crystal.flexin.record;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-import se.anyro.nfc_reader.NdefMessageParser;
+import com.crystal.flexin.NdefMessageParser;
 import se.anyro.nfc_reader.R;
 import android.app.Activity;
 import android.nfc.FormatException;
