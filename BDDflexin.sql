@@ -3,6 +3,7 @@ CREATE TABLE "Categorie" (
     nom character varying(255) NOT NULL
 );
 
+
 CREATE TABLE "Emprunt" (
     id integer NOT NULL,
     id_materiel integer NOT NULL,
