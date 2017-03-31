@@ -3,6 +3,8 @@ package com.crystal.flexin.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -13,17 +15,17 @@ import se.anyro.nfc_reader.BuildConfig;
 /**
  * Created by aymane on 22/03/17.
  */
-public interface ProxService {
+public interface FlexinService {
 
     public String ENDPOINT = "http://localhost:8080";
 
 
     @GET("materiel")
-    Call<Materiel> getUrlDetails();
+    Call<List<List<String>>> getUrlDetails();
 
     /******** Factory class that sets up a new Proximity services *******/
     class Factory {
-        public static ProxService makeProxService(String url) {
+        public static FlexinService makeFlexinService(String url) {
 
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
@@ -43,7 +45,7 @@ public interface ProxService {
                     .client(client)
                     .build();
 
-            return retrofit.create(ProxService.class);
+            return retrofit.create(FlexinService.class);
 
         }
 
