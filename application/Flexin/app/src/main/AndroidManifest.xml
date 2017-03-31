@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2012 Adam Nybäck
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,35 +14,47 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="se.anyro.nfc_reader"
-  android:versionCode="15"
-  android:versionName="0.15"
-  android:installLocation="auto">
+    package="se.anyro.nfc_reader"
+    android:installLocation="auto"
+    android:versionCode="15"
+    android:versionName="0.15">
 
-    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="23" />
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.NFC" />
+
     <uses-feature android:name="android.hardware.nfc" />
 
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
-      android:icon="@drawable/icon"
-      android:label="@string/app_name"
-      android:allowBackup="true">
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name">
         <activity
-          android:name="com.crystal.flexin.TagViewer"
-          android:label="@string/app_name"
-          android:screenOrientation="nosensor"
-          android:alwaysRetainTaskState="true"
-          android:launchMode="singleInstance">
+            android:name="com.crystal.flexin.TagViewer"
+            android:alwaysRetainTaskState="true"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:screenOrientation="nosensor">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name="com.crystal.flexin.impl.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.crystal.flexin.impl.SearchActivity"></activity>
     </application>
-    
-</manifest> 
+
+</manifest>

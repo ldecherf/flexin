@@ -21,6 +21,12 @@
           <item
             android:id="@+id/menu_copy_reversed_dec"
             android:title="@string/menu_copy_reversed_dec" />
+          <item
+              android:id="@+id/menu_search"
+              android:title="@string/menu_search" />
+          <item
+              android:id="@+id/menu_home"
+              android:title="@string/menu_home" />
       </menu>
   </item>
 </menu>
