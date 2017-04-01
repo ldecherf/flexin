@@ -1,4 +1,4 @@
-package com.crystal.flexin.impl;
+package com.crystal.flexin.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.crystal.flexin.TagViewer;
 
@@ -18,8 +19,8 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Button scanButton = (Button) findViewById(R.id.scanButton);
-        scanButton.setOnClickListener(new View.OnClickListener() {
+        ImageView searchNfcButton = (ImageView) findViewById(R.id.searchNfcButton);
+        searchNfcButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, TagViewer.class);
                 startActivity(intent);

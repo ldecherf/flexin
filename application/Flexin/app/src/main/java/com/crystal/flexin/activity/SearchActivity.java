@@ -1,4 +1,4 @@
-package com.crystal.flexin.impl;
+package com.crystal.flexin.activity;
 
 import android.os.Bundle;
 

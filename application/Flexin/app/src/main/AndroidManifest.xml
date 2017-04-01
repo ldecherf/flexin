@@ -47,14 +47,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.crystal.flexin.impl.HomeActivity">
+        <activity android:name="com.crystal.flexin.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.crystal.flexin.impl.SearchActivity"></activity>
+        <activity android:name="com.crystal.flexin.activity.SearchActivity"></activity>
     </application>
 
 </manifest>

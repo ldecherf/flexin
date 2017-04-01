@@ -28,4 +28,5 @@
     <string name="menu_search">Search</string>
     <string name="menu_home">Home</string>
     <string name="nothing_scanned">Nothing scanned yet</string>
+    <string name="HomeActivityTitleString">Equipements</string>
 </resources>
