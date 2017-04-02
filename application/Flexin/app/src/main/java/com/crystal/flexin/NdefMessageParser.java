@@ -30,7 +30,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import se.anyro.nfc_reader.R;
 
 /**
  * Utility class for creating {@link ParsedNdefMessage}s.

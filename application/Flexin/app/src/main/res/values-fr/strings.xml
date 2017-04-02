@@ -12,4 +12,5 @@
     <string name="nfc_disabled">Le NFC n\'est pas activé. Allez dans les paramètres "Sans fil et réseaux" pour l\'activer.</string>
     <string name="menu_main_clear_title">Effacer tout</string>
     <string name="HomeActivityTitleString">Equipements</string>
+    <string name="loading">Chargement...</string>
 </resources>

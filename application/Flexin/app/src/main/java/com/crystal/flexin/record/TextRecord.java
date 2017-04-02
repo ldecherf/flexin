@@ -18,7 +18,6 @@ package com.crystal.flexin.record;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
-import se.anyro.nfc_reader.R;
 import android.app.Activity;
 import android.nfc.NdefRecord;
 import android.view.LayoutInflater;
@@ -26,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.crystal.flexin.R;
 import com.google.common.base.Preconditions;
 
 /**

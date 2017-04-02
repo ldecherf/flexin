@@ -1,56 +1,86 @@
 package com.crystal.flexin.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
-import com.crystal.flexin.TagViewer;
+import com.crystal.flexin.R;
+import com.crystal.flexin.adapter.EquipmentListAdapter;
+import com.crystal.flexin.manager.EquipmentManager;
 
-import se.anyro.nfc_reader.R;
 
 public class HomeActivity extends Activity {
+
+
+    private ImageView searchTextButton;
+    private ImageView searchScanButton;
+    private ImageView searchNfcButton;
+    private ImageView searchLocationButton;
+    private ImageView sortByButton;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView homeActivityEquipmentRecyclerView;
+    private RecyclerView.Adapter recyclerViewAdapter;
+    private EquipmentManager equipmentManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ImageView searchNfcButton = (ImageView) findViewById(R.id.searchNfcButton);
-        searchNfcButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, TagViewer.class);
-                startActivity(intent);
+        init();
+    }
+
+    private void init(){
+
+        this.homeActivityEquipmentRecyclerView = (RecyclerView) findViewById(R.id.homeActivityEquipmentRecyclerView);
+        this.homeActivityEquipmentRecyclerView.setHasFixedSize(true);
+        this.mLayoutManager = new LinearLayoutManager(this);
+        this.homeActivityEquipmentRecyclerView.setLayoutManager(mLayoutManager);
+        this.equipmentManager = new EquipmentManager(findViewById(R.id.homeActivityMainLayout), this.homeActivityEquipmentRecyclerView);
+        this.equipmentManager.execute();
+
+        this.searchTextButton = (ImageView) findViewById(R.id.searchTextButton);
+        this.searchTextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
+        this.searchScanButton = (ImageView) findViewById(R.id.searchScanButton);
+        this.searchScanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-    }
+            }
+        });
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        this.searchNfcButton = (ImageView) findViewById(R.id.searchNfcButton);
+        this.searchNfcButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+            }
+        });
 
-        switch (item.getItemId()) {
-            case R.id.menu_search:
-                Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.menu_home:
-                Intent intent2 = new Intent(HomeActivity.this, HomeActivity.class);
-                startActivity(intent2);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        this.searchLocationButton = (ImageView) findViewById(R.id.searchLocationButton);
+        this.searchLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        this.sortByButton = (ImageView) findViewById(R.id.sortByButton);
+        this.sortByButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
 }

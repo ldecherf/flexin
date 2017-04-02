@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import com.crystal.flexin.NdefMessageParser;
-import se.anyro.nfc_reader.R;
 import android.app.Activity;
 import android.nfc.FormatException;
 import android.nfc.NdefMessage;
@@ -30,6 +29,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 
+import com.crystal.flexin.R;
 import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;

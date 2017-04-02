@@ -20,10 +20,5 @@ public class ListMaterielTest {
 
     @Test
     public void listMaterielTest() throws IOException {
-        FlexinService service = FlexinService.Factory.makeFlexinService(FlexinService.ENDPOINT);
-        Call<List<List<String>>> call = service.getUrlDetails();
-        Response<List<List<String>>> response = call.execute() ;
-        System.out.println(response.body().get(0).get(1));
-        //assertEquals(response.body().materiels.get(0),"");
     }
 }

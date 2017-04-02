@@ -2,7 +2,7 @@ package com.crystal.flexin.activity;
 
 import android.os.Bundle;
 
-import se.anyro.nfc_reader.R;
+import com.crystal.flexin.R;
 
 public class SearchActivity extends HomeActivity {
 

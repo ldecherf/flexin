@@ -1,5 +1,7 @@
 package com.crystal.flexin.data;
 
+import com.crystal.flexin.BuildConfig;
+import com.crystal.flexin.resources.Equipment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -11,7 +13,6 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import se.anyro.nfc_reader.BuildConfig;
 /**
  * Created by aymane on 22/03/17.
  */
@@ -21,7 +22,7 @@ public interface FlexinService {
 
 
     @GET("materiel")
-    Call<List<List<String>>> getUrlDetails();
+    Call<List<Equipment>> getUrlDetails();
 
     /******** Factory class that sets up a new Proximity services *******/
     class Factory {

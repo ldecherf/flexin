@@ -13,7 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+
 package com.crystal.flexin;
 
 import android.app.Activity;
@@ -56,9 +56,9 @@ import com.crystal.flexin.record.ParsedNdefRecord;
 
 import se.anyro.nfc_reader.R;
 
-/**
+
  * An {@link Activity} which handles a broadcast of a new tag that the device just discovered.
- */
+
 public class TagViewer extends Activity {
 
     private static final DateFormat TIME_FORMAT = SimpleDateFormat.getDateTimeInstance();
@@ -520,3 +520,4 @@ public class TagViewer extends Activity {
         resolveIntent(intent);
     }
 }
+*/
