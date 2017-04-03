@@ -109,4 +109,19 @@ public class Equipment {
     public void setId_position(int id_position) {
         this.id_position = id_position;
     }
+
+    @Override
+    public String toString() {
+        return "Equipment" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", reference='" + reference + '\'' +
+                ", id_rangement=" + id_rangement +
+                ", photo='" + photo + '\'' +
+                ", etat='" + etat + '\'' +
+                ", description='" + description + '\'' +
+                ", id_categorie=" + id_categorie +
+                ", id_plateforme=" + id_plateforme +
+                ", id_position=" + id_position;
+    }
 }

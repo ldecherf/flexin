@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -16,13 +17,14 @@ import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
  * Created by basaile92 on 01/04/2017.
  */
 
-public class EquipmentManager extends AsyncTask<Void , Void , List<Equipment>> {
+public class EquipmentManager extends AsyncTask<Void , Void , Response<List<Equipment>>> {
 
     private ProgressDialog progressDialog;
     private View view;
@@ -44,24 +46,24 @@ public class EquipmentManager extends AsyncTask<Void , Void , List<Equipment>> {
     }
 
     @Override
-    protected List<Equipment> doInBackground(Void... voids) {
+    protected Response<List<Equipment>> doInBackground(Void... voids) {
+        Response<List<Equipment>> response = null;
         try {
-            FlexinService service = FlexinService.Factory.makeFlexinService(FlexinService.ENDPOINT);
-            Call<List<Equipment>> call = service.getUrlDetails();
-            Response<List<Equipment>> response = call.execute();
-            return response.body();
+            FlexinService service = FlexinService.Factory.makeFlexinService(FlexinService.URL);
+            Call<List<Equipment>> call = service.getEquipmentList();
+            response = call.execute();
         }catch (IOException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return response;
     }
 
     @Override
-    protected void onPostExecute(List<Equipment> equipments) {
-        super.onPostExecute(equipments);
+    protected void onPostExecute(Response<List<Equipment>> equipmentsResponse) {
+        super.onPostExecute(equipmentsResponse);
         this.homeActivityEquipmentRecyclerView = (RecyclerView) this.view.findViewById(R.id.homeActivityEquipmentRecyclerView);
-        this.homeActivityEquipmentRecyclerView.setAdapter(new EquipmentListAdapter(equipments));
+        this.homeActivityEquipmentRecyclerView.setAdapter(new EquipmentListAdapter(equipmentsResponse.body()));
         this.progressDialog.dismiss();
     }
 

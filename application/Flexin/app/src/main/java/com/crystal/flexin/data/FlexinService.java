@@ -18,11 +18,11 @@ import retrofit2.http.GET;
  */
 public interface FlexinService {
 
-    public String ENDPOINT = "http://localhost:8080";
+    String URL = "http://localhost:8080";
 
 
     @GET("materiel")
-    Call<List<Equipment>> getUrlDetails();
+    Call<List<Equipment>> getEquipmentList();
 
     /******** Factory class that sets up a new Proximity services *******/
     class Factory {

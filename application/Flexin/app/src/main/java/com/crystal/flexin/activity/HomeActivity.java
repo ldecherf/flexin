@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.crystal.flexin.R;
-import com.crystal.flexin.adapter.EquipmentListAdapter;
 import com.crystal.flexin.manager.EquipmentManager;
 
 
