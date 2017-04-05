@@ -4,33 +4,31 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.crystal.flexin.R;
-import com.crystal.flexin.adapter.EquipmentListAdapter;
+import com.crystal.flexin.adapter.MaterielListAdapter;
 import com.crystal.flexin.data.FlexinService;
-import com.crystal.flexin.resources.Equipment;
+import com.crystal.flexin.resources.Materiel;
 
 import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
  * Created by basaile92 on 01/04/2017.
  */
 
-public class EquipmentManager extends AsyncTask<Void , Void , Response<List<Equipment>>> {
+public class MaterielManager extends AsyncTask<Void , Void , Response<List<Materiel>>> {
 
     private ProgressDialog progressDialog;
     private View view;
     private RecyclerView homeActivityEquipmentRecyclerView;
 
-    public EquipmentManager(View view, RecyclerView homeActivityEquipmentRecyclerView){
+    public MaterielManager(View view, RecyclerView homeActivityEquipmentRecyclerView){
 
         this.view = view;
         this.homeActivityEquipmentRecyclerView = homeActivityEquipmentRecyclerView;
@@ -46,11 +44,11 @@ public class EquipmentManager extends AsyncTask<Void , Void , Response<List<Equi
     }
 
     @Override
-    protected Response<List<Equipment>> doInBackground(Void... voids) {
-        Response<List<Equipment>> response = null;
+    protected Response<List<Materiel>> doInBackground(Void... voids) {
+        Response<List<Materiel>> response = null;
         try {
             FlexinService service = FlexinService.Factory.makeFlexinService(FlexinService.URL);
-            Call<List<Equipment>> call = service.getEquipmentList();
+            Call<List<Materiel>> call = service.getEquipmentList();
             response = call.execute();
         }catch (IOException e) {
             e.printStackTrace();
@@ -60,16 +58,16 @@ public class EquipmentManager extends AsyncTask<Void , Void , Response<List<Equi
     }
 
     @Override
-    protected void onPostExecute(Response<List<Equipment>> equipmentsResponse) {
+    protected void onPostExecute(Response<List<Materiel>> equipmentsResponse) {
         super.onPostExecute(equipmentsResponse);
-        this.homeActivityEquipmentRecyclerView = (RecyclerView) this.view.findViewById(R.id.homeActivityEquipmentRecyclerView);
-        this.homeActivityEquipmentRecyclerView.setAdapter(new EquipmentListAdapter(equipmentsResponse.body()));
+        this.homeActivityEquipmentRecyclerView = (RecyclerView) this.view.findViewById(R.id.homeActivityMaterielRecyclerView);
+        this.homeActivityEquipmentRecyclerView.setAdapter(new MaterielListAdapter(equipmentsResponse.body()));
         this.progressDialog.dismiss();
     }
 
     public static void setEtatColor(LinearLayout equipmentEtatLayout, String etat) {
 
-        if(etat.equals("neuf"))
+        if(etat.equals("bon"))
             equipmentEtatLayout.setBackgroundColor(Color.GREEN);
         else if(etat.equals("moyen"))
             equipmentEtatLayout.setBackgroundColor(Color.YELLOW);

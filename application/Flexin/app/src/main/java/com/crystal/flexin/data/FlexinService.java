@@ -1,7 +1,7 @@
 package com.crystal.flexin.data;
 
 import com.crystal.flexin.BuildConfig;
-import com.crystal.flexin.resources.Equipment;
+import com.crystal.flexin.resources.Materiel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -18,11 +18,11 @@ import retrofit2.http.GET;
  */
 public interface FlexinService {
 
-    String URL = "http://localhost:8080";
+    String URL = "http://192.168.43.34:8080";
 
 
     @GET("materiel")
-    Call<List<Equipment>> getEquipmentList();
+    Call<List<Materiel>> getEquipmentList();
 
     /******** Factory class that sets up a new Proximity services *******/
     class Factory {

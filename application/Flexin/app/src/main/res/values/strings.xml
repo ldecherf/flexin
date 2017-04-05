@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Flexin</string>
-    <string name="HomeActivityTitleString">Equipements</string>
-    <string name="loading">Chargement...</string>
+    <string name="HomeActivityTitleString">Equipment</string>
+    <string name="loading">Loading...</string>
 </resources>

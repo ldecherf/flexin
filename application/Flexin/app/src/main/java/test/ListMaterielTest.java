@@ -1,8 +1,7 @@
 package test;
 
 import com.crystal.flexin.data.FlexinService;
-import com.crystal.flexin.data.Materiel;
-import com.crystal.flexin.resources.Equipment;
+import com.crystal.flexin.resources.Materiel;
 
 import
         org.junit.Test;
@@ -23,8 +22,8 @@ public class ListMaterielTest {
     @Test
     public void listMaterielTest() throws IOException {
         FlexinService service = FlexinService.Factory.makeFlexinService(FlexinService.URL);
-        Call<List<Equipment>> call = service.getEquipmentList();
-        Response<List<Equipment>> response = call.execute() ;
+        Call<List<Materiel>> call = service.getEquipmentList();
+        Response<List<Materiel>> response = call.execute() ;
         assertEquals(response.body().get(0).getNom(),"Enceintes");
     }
 

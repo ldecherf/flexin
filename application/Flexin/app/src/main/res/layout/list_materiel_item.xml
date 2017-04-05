@@ -1,53 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listEquipmentItemMainLayout"
+    android:id="@+id/listMaterielItemMainLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:paddingTop="1dp"
     android:weightSum="1">
 
     <ImageView
-        android:id="@+id/equipmentImageView"
+        android:id="@+id/materielImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.6"
+        android:layout_weight="0.8"
         android:src="@android:drawable/ic_menu_report_image" />
 
     <LinearLayout
-        android:id="@+id/equipmentEtatLayout"
+        android:id="@+id/materielEtatLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.4"
+        android:layout_weight="0.2"
         android:gravity="center"
         android:orientation="vertical"
         android:weightSum="1">
 
         <LinearLayout
-            android:id="@+id/equipmentTextLayout"
+            android:id="@+id/materielTextLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
             android:gravity="center"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="1dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
+            android:paddingTop="1dp"
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/equipmentPlatformText"
+                android:id="@+id/materielPlatformText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:background="@android:color/background_light"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@android:color/black" />
 
             <TextView
-                android:id="@+id/equipmentNameText"
+                android:id="@+id/materielNameText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:background="@android:color/background_light"
                 android:gravity="center"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
     </LinearLayout>

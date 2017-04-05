@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.crystal.flexin.R;
-import com.crystal.flexin.manager.EquipmentManager;
+import com.crystal.flexin.manager.MaterielManager;
 
 
 public class HomeActivity extends Activity {
@@ -21,8 +21,7 @@ public class HomeActivity extends Activity {
     private ImageView sortByButton;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView homeActivityEquipmentRecyclerView;
-    private RecyclerView.Adapter recyclerViewAdapter;
-    private EquipmentManager equipmentManager;
+    private MaterielManager materielManager;
 
 
     @Override
@@ -34,12 +33,12 @@ public class HomeActivity extends Activity {
 
     private void init(){
 
-        this.homeActivityEquipmentRecyclerView = (RecyclerView) findViewById(R.id.homeActivityEquipmentRecyclerView);
+        this.homeActivityEquipmentRecyclerView = (RecyclerView) findViewById(R.id.homeActivityMaterielRecyclerView);
         this.homeActivityEquipmentRecyclerView.setHasFixedSize(true);
         this.mLayoutManager = new LinearLayoutManager(this);
         this.homeActivityEquipmentRecyclerView.setLayoutManager(mLayoutManager);
-        this.equipmentManager = new EquipmentManager(findViewById(R.id.homeActivityMainLayout), this.homeActivityEquipmentRecyclerView);
-        this.equipmentManager.execute();
+        this.materielManager = new MaterielManager(findViewById(R.id.homeActivityMainLayout), this.homeActivityEquipmentRecyclerView);
+        this.materielManager.execute();
 
         this.searchTextButton = (ImageView) findViewById(R.id.searchTextButton);
         this.searchTextButton.setOnClickListener(new View.OnClickListener() {

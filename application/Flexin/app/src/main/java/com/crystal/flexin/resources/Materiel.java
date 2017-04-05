@@ -4,7 +4,7 @@ package com.crystal.flexin.resources;
  * Created by basaile92 on 01/04/2017.
  */
 
-public class Equipment {
+public class Materiel {
 
     private int id;
     private String nom;
@@ -14,10 +14,10 @@ public class Equipment {
     private String etat;
     private String description;
     private int id_categorie;
-    private int id_plateforme;
+    private String plateforme;
     private int id_position;
 
-    public Equipment(int id, String nom, String reference, int id_rangement, String photo, String etat, String description, int id_categorie, int id_plateforme, int id_position) {
+    public Materiel(int id, String nom, String reference, int id_rangement, String photo, String etat, String description, int id_categorie, String plateforme, int id_position) {
         this.id = id;
         this.nom = nom;
         this.reference = reference;
@@ -26,7 +26,7 @@ public class Equipment {
         this.etat = etat;
         this.description = description;
         this.id_categorie = id_categorie;
-        this.id_plateforme = id_plateforme;
+        this.plateforme = plateforme;
         this.id_position = id_position;
     }
 
@@ -94,12 +94,12 @@ public class Equipment {
         this.id_categorie = id_categorie;
     }
 
-    public int getId_plateforme() {
-        return id_plateforme;
+    public String getPlateforme() {
+        return plateforme;
     }
 
-    public void setId_plateforme(int id_plateforme) {
-        this.id_plateforme = id_plateforme;
+    public void setPlateforme(String plateforme) {
+        this.plateforme = plateforme;
     }
 
     public int getId_position() {
@@ -112,7 +112,7 @@ public class Equipment {
 
     @Override
     public String toString() {
-        return "Equipment" +
+        return "Materiel" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", reference='" + reference + '\'' +
@@ -121,7 +121,7 @@ public class Equipment {
                 ", etat='" + etat + '\'' +
                 ", description='" + description + '\'' +
                 ", id_categorie=" + id_categorie +
-                ", id_plateforme=" + id_plateforme +
+                ", id_plateforme=" + plateforme +
                 ", id_position=" + id_position;
     }
 }
