@@ -1,5 +1,4 @@
-/*
- * Copyright (C) 2010 The Android Open Source Project
+ /* Copyright (C) 2010 The Android Open Source Project
  * Copyright (C) 2011 Adam Nybäck
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * An {@link Activity} which handles a broadcast of a new tag that the device just discovered.
+ */
 
 package com.crystal.flexin;
 
@@ -39,9 +40,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.crystal.flexin.activity.SearchActivity;
+import com.crystal.flexin.record.ParsedNdefRecord;
 
 import java.nio.charset.Charset;
 import java.text.DateFormat;
@@ -51,18 +56,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import com.crystal.flexin.NdefMessageParser;
-import com.crystal.flexin.record.ParsedNdefRecord;
-
-import se.anyro.nfc_reader.R;
 
 
- * An {@link Activity} which handles a broadcast of a new tag that the device just discovered.
 
-public class TagViewer extends Activity {
+ public class TagViewer extends Activity {
 
-    private static final DateFormat TIME_FORMAT = SimpleDateFormat.getDateTimeInstance();
-    private LinearLayout mTagContent;
+     private static final DateFormat TIME_FORMAT = SimpleDateFormat.getDateTimeInstance();
+    //private LinearLayout mTagContent;
 
     private NfcAdapter mAdapter;
     private PendingIntent mPendingIntent;
@@ -76,7 +76,7 @@ public class TagViewer extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tag_viewer);
-        mTagContent = (LinearLayout) findViewById(R.id.list);
+        //mTagContent = (LinearLayout) findViewById(R.id.list);
         resolveIntent(getIntent());
 
         mDialog = new AlertDialog.Builder(this).setNeutralButton("Ok", null).create();
@@ -92,6 +92,7 @@ public class TagViewer extends Activity {
                 new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         mNdefPushMessage = new NdefMessage(new NdefRecord[] { newTextRecord(
                 "Message from NFC Reader :-)", Locale.ENGLISH, true) });
+
     }
 
     private void showMessage(int title, int message) {
@@ -170,29 +171,35 @@ public class TagViewer extends Activity {
                 }
             } else {
                 // Unknown tag type
-                byte[] empty = new byte[0];
-                byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
+                //byte[] empty = new byte[0];
+                //byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
                 Tag tag = (Tag) intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                byte[] payload = dumpTagData(tag).getBytes();
+                /*byte[] payload = dumpTagData(tag).getBytes();
+                System.out.println("ceciiii est uuun taggggg ....... " + dumpTagData(tag));
                 NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload);
                 NdefMessage msg = new NdefMessage(new NdefRecord[] { record });
                 msgs = new NdefMessage[] { msg };
-                mTags.add(tag);
+                mTags.add(tag);*/
+                Intent intent2 = new Intent(this, SearchActivity.class);
+                intent2.putExtra("tag", dumpTagData(tag));
+                startActivity(intent2);
+
             }
             // Setup the views
-            buildTagViews(msgs);
+            //buildTagViews(msgs);
+
         }
     }
 
     private String dumpTagData(Tag tag) {
         StringBuilder sb = new StringBuilder();
         byte[] id = tag.getId();
-        sb.append("ID (hex): ").append(toHex(id)).append('\n');
-        sb.append("ID (reversed hex): ").append(toReversedHex(id)).append('\n');
+        //sb.append("ID (hex): ").append(toHex(id)).append('\n');
+        //sb.append("ID (reversed hex): ").append(toReversedHex(id)).append('\n');
         sb.append("ID (dec): ").append(toDec(id)).append('\n');
-        sb.append("ID (reversed dec): ").append(toReversedDec(id)).append('\n');
+        //sb.append("ID (reversed dec): ").append(toReversedDec(id)).append('\n');
 
-        String prefix = "android.nfc.tech.";
+        /*String prefix = "android.nfc.tech.";
         sb.append("Technologies: ");
         for (String tech : tag.getTechList()) {
             sb.append(tech.substring(prefix.length()));
@@ -257,11 +264,11 @@ public class TagViewer extends Activity {
                 sb.append("Mifare Ultralight type: ");
                 sb.append(type);
             }
-        }
+        }*/
 
         return sb.toString();
     }
-
+/*
     private Tag cleanupTag(Tag oTag) {
         if (oTag == null)
             return null;
@@ -348,8 +355,8 @@ public class TagViewer extends Activity {
         nParcel.recycle();
 
         return nTag;
-    }
-
+    }*/
+/*
     private String toHex(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
         for (int i = bytes.length - 1; i >= 0; --i) {
@@ -376,7 +383,7 @@ public class TagViewer extends Activity {
             sb.append(Integer.toHexString(b));
         }
         return sb.toString();
-    }
+    }*/
 
     private long toDec(byte[] bytes) {
         long result = 0;
@@ -389,7 +396,7 @@ public class TagViewer extends Activity {
         return result;
     }
 
-    private long toReversedDec(byte[] bytes) {
+/*    private long toReversedDec(byte[] bytes) {
         long result = 0;
         long factor = 1;
         for (int i = bytes.length - 1; i >= 0; --i) {
@@ -409,13 +416,9 @@ public class TagViewer extends Activity {
 
         // Parse the first message in the list
         // Build views for all of the sub records
-        Date now = new Date();
         List<ParsedNdefRecord> records = NdefMessageParser.parse(msgs[0]);
         final int size = records.size();
         for (int i = 0; i < size; i++) {
-            TextView timeView = new TextView(this);
-            timeView.setText(TIME_FORMAT.format(now));
-            content.addView(timeView, 0);
             ParsedNdefRecord record = records.get(i);
             content.addView(record.getView(this, inflater, content, i), 1 + i);
             content.addView(inflater.inflate(R.layout.tag_divider, content, false), 2 + i);
@@ -440,17 +443,8 @@ public class TagViewer extends Activity {
         case R.id.menu_main_clear:
             clearTags();
             return true;
-        case R.id.menu_copy_hex:
-            copyIds(getIdsHex());
-            return true;
-        case R.id.menu_copy_reversed_hex:
-            copyIds(getIdsReversedHex());
-            return true;
         case R.id.menu_copy_dec:
             copyIds(getIdsDec());
-            return true;
-        case R.id.menu_copy_reversed_dec:
-            copyIds(getIdsReversedDec());
             return true;
         default:
             return super.onOptionsItemSelected(item);
@@ -512,7 +506,7 @@ public class TagViewer extends Activity {
         }
         builder.setLength(builder.length() - 1); // Remove last new line
         return builder.toString();
-    }
+    }*/
 
     @Override
     public void onNewIntent(Intent intent) {
@@ -520,4 +514,3 @@ public class TagViewer extends Activity {
         resolveIntent(intent);
     }
 }
-*/

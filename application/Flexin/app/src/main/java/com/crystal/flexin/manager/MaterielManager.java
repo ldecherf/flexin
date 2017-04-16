@@ -60,7 +60,7 @@ public class MaterielManager extends AsyncTask<Void , Void , Response<List<Mater
     @Override
     protected void onPostExecute(Response<List<Materiel>> equipmentsResponse) {
         super.onPostExecute(equipmentsResponse);
-        this.homeActivityEquipmentRecyclerView = (RecyclerView) this.view.findViewById(R.id.homeActivityMaterielRecyclerView);
+        //this.homeActivityEquipmentRecyclerView = (RecyclerView) this.view.findViewById(R.id.homeActivityMaterielRecyclerView);
         this.homeActivityEquipmentRecyclerView.setAdapter(new MaterielListAdapter(equipmentsResponse.body()));
         this.progressDialog.dismiss();
     }

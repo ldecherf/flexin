@@ -1,14 +1,19 @@
 package com.crystal.flexin.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.crystal.flexin.R;
+import com.crystal.flexin.TagViewer;
 import com.crystal.flexin.manager.MaterielManager;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 
 public class HomeActivity extends Activity {
@@ -28,17 +33,18 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         init();
     }
 
     private void init(){
-
+        /*/
         this.homeActivityEquipmentRecyclerView = (RecyclerView) findViewById(R.id.homeActivityMaterielRecyclerView);
         this.homeActivityEquipmentRecyclerView.setHasFixedSize(true);
         this.mLayoutManager = new LinearLayoutManager(this);
         this.homeActivityEquipmentRecyclerView.setLayoutManager(mLayoutManager);
         this.materielManager = new MaterielManager(findViewById(R.id.homeActivityMainLayout), this.homeActivityEquipmentRecyclerView);
-        this.materielManager.execute();
+        this.materielManager.execute();*/
 
         this.searchTextButton = (ImageView) findViewById(R.id.searchTextButton);
         this.searchTextButton.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +64,10 @@ public class HomeActivity extends Activity {
 
         this.searchNfcButton = (ImageView) findViewById(R.id.searchNfcButton);
         this.searchNfcButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), TagViewer.class);
+                startActivity(intent);
             }
         });
 
