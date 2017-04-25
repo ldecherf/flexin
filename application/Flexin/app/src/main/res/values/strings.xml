@@ -14,4 +14,9 @@
     <string name="menu_copy_dec">Dec</string>
     <string name="menu_copy_reversed_dec">Reversed dec</string>
     <string name="nothing_scanned">Nothing scanned yet</string>
+    <string name="connectionLabel">Connecter vous avec votre carte de l\'université</string>
+    <string name="NoUserConnection">Ne pas se connecter</string>
+    <string name="searchLabel">Search</string>
+    <string name="cancel">Annuler</string>
+    <string name="searchTextDialogTitle">Recherche:</string>
 </resources>

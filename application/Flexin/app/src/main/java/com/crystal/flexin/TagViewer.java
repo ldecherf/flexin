@@ -20,39 +20,22 @@ package com.crystal.flexin;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
-import android.nfc.tech.MifareClassic;
-import android.nfc.tech.MifareUltralight;
-import android.nfc.tech.NfcA;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Settings;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.crystal.flexin.activity.SearchActivity;
-import com.crystal.flexin.record.ParsedNdefRecord;
+import com.crystal.flexin.activity.NFCSearchActivity;
 
 import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -180,7 +163,7 @@ import java.util.Locale;
                 NdefMessage msg = new NdefMessage(new NdefRecord[] { record });
                 msgs = new NdefMessage[] { msg };
                 mTags.add(tag);*/
-                Intent intent2 = new Intent(this, SearchActivity.class);
+                Intent intent2 = new Intent(this, NFCSearchActivity.class);
                 intent2.putExtra("tag", dumpTagData(tag));
                 startActivity(intent2);
 

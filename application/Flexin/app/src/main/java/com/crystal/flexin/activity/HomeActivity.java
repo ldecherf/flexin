@@ -1,16 +1,23 @@
 package com.crystal.flexin.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.crystal.flexin.R;
 import com.crystal.flexin.TagViewer;
+import com.crystal.flexin.fragment.DialogTextSearchFragment;
 import com.crystal.flexin.manager.MaterielManager;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
@@ -51,6 +58,8 @@ public class HomeActivity extends Activity {
             @Override
             public void onClick(View view) {
 
+                DialogFragment dialogTextSearchFragment = new DialogTextSearchFragment();
+                dialogTextSearchFragment.show(getFragmentManager(), "DialogTextSearchFragment");
             }
         });
 
@@ -88,5 +97,7 @@ public class HomeActivity extends Activity {
         });
 
     }
+
+
 
 }

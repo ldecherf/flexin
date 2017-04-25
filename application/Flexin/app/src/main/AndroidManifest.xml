@@ -12,25 +12,32 @@
     <uses-permission android:name="android.permission.NFC" />
 
     <uses-feature android:name="android.hardware.nfc" />
-    <uses-permission android:name="android.permission.INTERNET"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:theme="@style/Theme.AppCompat"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name">
-        <activity android:name="com.crystal.flexin.activity.HomeActivity">
+        <activity android:name=".activity.ConnectionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="com.crystal.flexin.TagViewer"></activity>
-        <activity android:name="com.crystal.flexin.activity.SearchActivity"></activity>
+        <activity android:name=".activity.HomeActivity"></activity>
+        <activity android:name=".TagViewer" />
+        <activity android:name=".activity.NFCSearchActivity" />
+        <activity android:name=".activity.TextSearchActivity"></activity>
     </application>
 
 </manifest>

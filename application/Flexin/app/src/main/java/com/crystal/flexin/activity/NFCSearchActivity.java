@@ -6,12 +6,12 @@ import android.widget.TextView;
 
 import com.crystal.flexin.R;
 
-public class SearchActivity extends HomeActivity {
+public class NFCSearchActivity extends HomeActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_nfc_search);
 
         Intent intent = getIntent();
         //ce message est recu a partir de l'activite TagViewer method resolveIntent()

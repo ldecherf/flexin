@@ -13,4 +13,8 @@
     <string name="menu_main_clear_title">Effacer tout</string>
     <string name="HomeActivityTitleString">Matériel</string>
     <string name="loading">Chargement...</string>
+    <string name="connectionLabel">Connecter vous avec votre carte de l\'université</string>
+    <string name="searchLabel">Search</string>
+    <string name="cancel">Annuler</string>
+    <string name="searchTextDialogTitle">Recherche:</string>
 </resources>
