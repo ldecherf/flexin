@@ -4,7 +4,7 @@ package com.crystal.flexin.data;
  */
 public class DataManager {
 
-    public FlexinService proxService = FlexinService.Factory.makeFlexinService(FlexinService.URL);
+    public FlexinService flexService = FlexinService.Factory.makeFlexinService(FlexinService.URL);
 
     private static DataManager mInstance;
 

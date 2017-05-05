@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import com.crystal.flexin.R;
 import com.crystal.flexin.adapter.MaterielListAdapter;
 import com.crystal.flexin.data.FlexinService;
-import com.crystal.flexin.resources.Materiel;
+import com.crystal.flexin.data.Materiel;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,8 +22,8 @@ import retrofit2.Response;
  * Created by basaile92 on 01/04/2017.
  */
 
-public class MaterielManager extends AsyncTask<Void , Void , Response<List<Materiel>>> {
-
+public class MaterielManager {
+/*
     private ProgressDialog progressDialog;
     private View view;
     private RecyclerView homeActivityEquipmentRecyclerView;
@@ -44,11 +44,11 @@ public class MaterielManager extends AsyncTask<Void , Void , Response<List<Mater
     }
 
     @Override
-    protected Response<List<Materiel>> doInBackground(Void... voids) {
-        Response<List<Materiel>> response = null;
+    protected Response<Materiel> doInBackground(Void... voids) {
+        Response<Materiel> response = null;
         try {
             FlexinService service = FlexinService.Factory.makeFlexinService(FlexinService.URL);
-            Call<List<Materiel>> call = service.getEquipmentList();
+            Call<Materiel> call = service.getMateriel();
             response = call.execute();
         }catch (IOException e) {
             e.printStackTrace();
@@ -76,5 +76,5 @@ public class MaterielManager extends AsyncTask<Void , Void , Response<List<Mater
         else if(etat.equals("detruit") || etat.equals("obsolete"))
             equipmentEtatLayout.setBackgroundColor(Color.GRAY);
     }
-
+*/
 }

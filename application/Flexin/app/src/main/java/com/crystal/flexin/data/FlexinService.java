@@ -1,10 +1,13 @@
 package com.crystal.flexin.data;
 
 import com.crystal.flexin.BuildConfig;
-import com.crystal.flexin.resources.Materiel;
+import com.crystal.flexin.data.Materiel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.Collection;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -13,19 +16,22 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
+
 /**
  * Created by aymane on 22/03/17.
  */
 public interface FlexinService {
 
-    String URL = "http://192.168.43.34:8080";
+    String URL = "http://192.168.172.53:8080/"; //192.168.43.34
 
 
-    @GET("materiel")
-    Call<List<Materiel>> getEquipmentList();
+    @GET("materiel/{id}")
+    Call<ListMateriels> getMateriel(@Path("id")String id);
 
     /******** Factory class that sets up a new Proximity services *******/
     class Factory {
+
         public static FlexinService makeFlexinService(String url) {
 
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -40,11 +46,13 @@ public interface FlexinService {
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                     .create();
 
+
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(client)
                     .build();
+
 
             return retrofit.create(FlexinService.class);
 

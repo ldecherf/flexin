@@ -6,8 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +16,7 @@ import android.widget.ImageView;
 
 import com.crystal.flexin.R;
 import com.crystal.flexin.TagViewer;
+import com.crystal.flexin.data.Materiel;
 import com.crystal.flexin.fragment.DialogTextSearchFragment;
 import com.crystal.flexin.manager.MaterielManager;
 

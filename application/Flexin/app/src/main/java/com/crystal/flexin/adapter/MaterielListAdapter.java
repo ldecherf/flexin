@@ -19,8 +19,8 @@ import java.util.List;
  * Created by basaile92 on 01/04/2017.
  */
 
-public class MaterielListAdapter extends RecyclerView.Adapter<MaterielListAdapter.ViewHolder> {
-
+public class MaterielListAdapter /*extends RecyclerView.Adapter<MaterielListAdapter.ViewHolder>*/ {
+/*
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView MaterielImageView;
@@ -99,5 +99,5 @@ public class MaterielListAdapter extends RecyclerView.Adapter<MaterielListAdapte
     @Override
     public int getItemCount() {
         return this.materielList.size();
-    }
+    }*/
 }
