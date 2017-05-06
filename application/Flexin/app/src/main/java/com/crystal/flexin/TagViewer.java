@@ -29,7 +29,9 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
+import android.widget.TextView;
 
+import com.crystal.flexin.activity.EmpruntActivity;
 import com.crystal.flexin.activity.NFCSearchActivity;
 
 import java.nio.charset.Charset;
@@ -55,10 +57,21 @@ import java.util.Locale;
 
     private List<Tag> mTags = new ArrayList<Tag>();
 
+     private boolean forEmprunt ;
+     private String id_materiel ;
+     private String etat_emprunt ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        this.forEmprunt = intent.getExtras().getBoolean("forEmprunt");
         setContentView(R.layout.tag_viewer);
+        if(this.forEmprunt){
+            TextView textView = (TextView) findViewById(R.id.tag_viewer_text);
+            textView.setText("AUTHENTICATION .. En attente de scan ...");
+            this.id_materiel = intent.getStringExtra("id_materiel");
+            this.etat_emprunt = intent.getStringExtra("etat_emprunt");
+        }
         //mTagContent = (LinearLayout) findViewById(R.id.list);
         resolveIntent(getIntent());
 
@@ -163,9 +176,22 @@ import java.util.Locale;
                 NdefMessage msg = new NdefMessage(new NdefRecord[] { record });
                 msgs = new NdefMessage[] { msg };
                 mTags.add(tag);*/
-                Intent intent2 = new Intent(this, NFCSearchActivity.class);
-                intent2.putExtra("tag", dumpTagData(tag));
-                startActivity(intent2);
+                Intent intent2 ;
+                if(!this.forEmprunt) {
+                    intent2 = new Intent(this, NFCSearchActivity.class);
+                    intent2.putExtra("tag", dumpTagData(tag));
+                    startActivity(intent2);
+                }
+                //j'ai fait ici la cle primaire id de meme valeur que id_materiel
+                else{
+                    intent2 = new Intent(this, EmpruntActivity.class);
+                    intent2.putExtra("id_emprunt",this.id_materiel);
+                    intent2.putExtra("id_emprunteur", dumpTagData(tag));
+                    intent2.putExtra("id_materiel",this.id_materiel);
+                    intent2.putExtra("etat_emprunt",this.etat_emprunt);
+
+                    startActivity(intent2);
+                }
 
             }
             // Setup the views

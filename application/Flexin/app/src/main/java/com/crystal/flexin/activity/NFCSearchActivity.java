@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.crystal.flexin.R;
+import com.crystal.flexin.TagViewer;
 import com.crystal.flexin.data.Materiel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -34,16 +35,19 @@ public class NFCSearchActivity extends HomeActivity {
         String message = intent.getStringExtra("tag");
         TextView tagId = (TextView) findViewById(R.id.id);
         tagId.setText(message);
-        //jusqu'ici j'ai juste pris le contenu du tag et l'affiche
-        //ce qu'il reste a faire c'est de l'envoyer dans une requete
-        //pour recuperer toutes les infos qui lui correspondent
-        //et afficher le tout sur cette activite
+
         //displayMateriel();
         Button emprunterbtn = (Button) findViewById(R.id.emprunterbtn);
         emprunterbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                TextView id_materielView = (TextView) findViewById(R.id.id);
+                TextView etatView = (TextView) findViewById(R.id.etat);
+                Intent intent = new Intent(v.getContext(), TagViewer.class);
+                intent.putExtra("forEmprunt", true);
+                intent.putExtra("id_materiel",id_materielView.getText());
+                intent.putExtra("etat_emprunt",etatView.getText());
+                startActivity(intent);
             }
         });
 
@@ -52,7 +56,7 @@ public class NFCSearchActivity extends HomeActivity {
 
     public void displayMateriel(){
         final MaterielBis materielBis = new MaterielBis();
-        materielBis.getMateriel(new MaterielBis.getMaterielCallBack() {
+        materielBis.getMateriel(new MaterielBis.GetMaterielCallBack() {
             @Override
             public void onSuccess(Materiel materiel) {
                 materielBis.setMateriel(materiel);

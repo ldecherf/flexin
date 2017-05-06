@@ -21,6 +21,19 @@ import okhttp3.Response;
 public class MaterielBis {
 
     private Materiel materiel ;
+    private String id ;
+    private String id_materiel ;
+    private String etat_emprunt ;
+    private String id_emprunteur ;
+
+    public MaterielBis(){}
+
+    public MaterielBis(String id,String id_materiel,String etat_emprunt,String id_emprunteur){
+        this.id = id ;
+        this.id_materiel = id_materiel ;
+        this.etat_emprunt = etat_emprunt ;
+        this.id_emprunteur = id_emprunteur ;
+    }
 
     public void setMateriel(Materiel mat){
         this.materiel = mat ;
@@ -32,7 +45,7 @@ public class MaterielBis {
 
     //connecter le telephone en localhost ;)
 
-    public final void getMateriel(final getMaterielCallBack getMaterielCallBack){
+    public final void getMateriel(final GetMaterielCallBack getMaterielCallBack){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("http://localhost:8080/materiel/1").build();
         client.newCall(request).enqueue(new Callback() {
@@ -53,10 +66,31 @@ public class MaterielBis {
         });
     }
 
-    public interface getMaterielCallBack {
+    public interface GetMaterielCallBack {
         public void onSuccess(Materiel materiel);
         public void onFail();
     }
 
 
+    public final void emprunterMateriel(final EmprunterMaterielCallBack emprunterMaterielCallBack){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url("http://192.168.172.52:8080/emprunt/"+this.id+this.id_materiel+this.etat_emprunt+this.id_emprunteur).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.err.println("Emprunter materiel failed .. Callback failure in MatarielBis class");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                emprunterMaterielCallBack.onSuccess("veuillez récuperer le materiel, prenez en soin !");
+            }
+        });
+    }
+
+
+    public interface EmprunterMaterielCallBack {
+        public void onSuccess(String msg);
+        public void onFail();
+    }
 }

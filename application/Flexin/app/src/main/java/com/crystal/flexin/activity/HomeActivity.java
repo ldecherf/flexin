@@ -76,6 +76,7 @@ public class HomeActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), TagViewer.class);
+                intent.putExtra("forEmprunt", false);
                 startActivity(intent);
             }
         });
