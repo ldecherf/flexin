@@ -22,8 +22,8 @@ import retrofit2.Response;
  * Created by basaile92 on 01/04/2017.
  */
 
-public class MaterielManager {
-/*
+public class MaterielManager extends AsyncTask< Void, Void, Response<List<Materiel>>>{
+
     private ProgressDialog progressDialog;
     private View view;
     private RecyclerView homeActivityEquipmentRecyclerView;
@@ -44,8 +44,8 @@ public class MaterielManager {
     }
 
     @Override
-    protected Response<Materiel> doInBackground(Void... voids) {
-        Response<Materiel> response = null;
+    protected Response<List<Materiel>> doInBackground(Void... voids) {
+        Response<List<Materiel>> response = null;
         try {
             FlexinService service = FlexinService.Factory.makeFlexinService(FlexinService.URL);
             Call<Materiel> call = service.getMateriel();
@@ -76,5 +76,5 @@ public class MaterielManager {
         else if(etat.equals("detruit") || etat.equals("obsolete"))
             equipmentEtatLayout.setBackgroundColor(Color.GRAY);
     }
-*/
+
 }

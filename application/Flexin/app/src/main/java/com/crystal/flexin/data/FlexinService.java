@@ -29,6 +29,9 @@ public interface FlexinService {
     @GET("materiel/{id}")
     Call<ListMateriels> getMateriel(@Path("id")String id);
 
+    @GET("name/{name}")
+    Call<ListMateriels> getMaterielByName(@Path("name")String name);
+
     /******** Factory class that sets up a new Proximity services *******/
     class Factory {
 
