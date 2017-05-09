@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.crystal.flexin.R;
+import com.crystal.flexin.manager.MaterielManager;
 
 public class EmpruntActivity extends AppCompatActivity {
 
@@ -25,17 +26,24 @@ public class EmpruntActivity extends AppCompatActivity {
         this.etat_emprunt = intent.getStringExtra("etat_emprunt");
         this.id_emprunteur = intent.getStringExtra("id_emprunteur");
 
-        //emprunterMateriel();
+        emprunterMateriel();
 
     }
 
     public void emprunterMateriel(){
-        final MaterielBis materielBis = new MaterielBis(this.id,this.id_materiel,this.etat_emprunt,this.id_emprunteur);
-        materielBis.emprunterMateriel(new MaterielBis.EmprunterMaterielCallBack() {
+        final MaterielManager materielManager = new MaterielManager(this.id,this.id_materiel,this.etat_emprunt,this.id_emprunteur);
+        materielManager.emprunterMateriel(new MaterielManager.EmprunterMaterielCallBack() {
             @Override
-            public void onSuccess(String msg) {
-                TextView msg_empruntView = (TextView) findViewById(R.id.msg_emprunt);
-                msg_empruntView.setText(msg);
+            public void onSuccess(final String msg) {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        TextView msg_empruntView = (TextView) findViewById(R.id.msg_emprunt);
+                        msg_empruntView.setText(msg);
+                    }
+                });
             }
 
             @Override

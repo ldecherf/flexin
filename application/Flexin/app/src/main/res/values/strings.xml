@@ -19,4 +19,5 @@
     <string name="searchLabel">Search</string>
     <string name="cancel">Annuler</string>
     <string name="searchTextDialogTitle">Recherche:</string>
+    <string name="materielNotFoundError">Le matériel n\'existe pas dans la base données</string>
 </resources>

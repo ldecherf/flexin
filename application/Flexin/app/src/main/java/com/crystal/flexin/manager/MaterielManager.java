@@ -1,80 +1,110 @@
 package com.crystal.flexin.manager;
 
-import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.LinearLayout;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.crystal.flexin.R;
-import com.crystal.flexin.adapter.MaterielListAdapter;
-import com.crystal.flexin.data.FlexinService;
 import com.crystal.flexin.resources.Materiel;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.Serializable;
+import java.lang.reflect.Type;
+import java.util.Collection;
 
-import retrofit2.Call;
-import retrofit2.Response;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
- * Created by basaile92 on 01/04/2017.
+ * Created by aymane on 01/05/17.
  */
 
-public class MaterielManager extends AsyncTask< Void, Void, Response<List<Materiel>>>{
+public class MaterielManager implements Serializable{
 
-    private ProgressDialog progressDialog;
-    private View view;
-    private RecyclerView homeActivityEquipmentRecyclerView;
+    String URL = "http://192.168.43.34:8080/";
 
-    public MaterielManager(View view, RecyclerView homeActivityEquipmentRecyclerView){
+    private Materiel materiel ;
+    private String id ;
+    private String id_materiel ;
+    private String etat_emprunt ;
+    private String id_emprunteur ;
 
-        this.view = view;
-        this.homeActivityEquipmentRecyclerView = homeActivityEquipmentRecyclerView;
+    public MaterielManager(String id){
+        this.id = id ;
     }
 
-    @Override
-    protected void onPreExecute() {
-
-        super.onPreExecute();
-        this.progressDialog = new ProgressDialog(this.view.getContext());
-        this.progressDialog.setMessage(this.view.getContext().getString(R.string.loading));
-        this.progressDialog.show();
+    public MaterielManager(String id, String id_materiel, String etat_emprunt, String id_emprunteur){
+        this.id = id ;
+        this.id_materiel = id_materiel ;
+        this.etat_emprunt = etat_emprunt ;
+        this.id_emprunteur = id_emprunteur ;
     }
 
-    @Override
-    protected Response<List<Materiel>> doInBackground(Void... voids) {
-        Response<List<Materiel>> response = null;
-        try {
-            FlexinService service = FlexinService.Factory.makeFlexinService(FlexinService.URL);
-            Call<Materiel> call = service.getMateriel();
-            response = call.execute();
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return response;
+    public void setMateriel(Materiel mat){
+        this.materiel = mat ;
     }
 
-    @Override
-    protected void onPostExecute(Response<List<Materiel>> equipmentsResponse) {
-        super.onPostExecute(equipmentsResponse);
-        //this.homeActivityEquipmentRecyclerView = (RecyclerView) this.view.findViewById(R.id.homeActivityMaterielRecyclerView);
-        this.homeActivityEquipmentRecyclerView.setAdapter(new MaterielListAdapter(equipmentsResponse.body()));
-        this.progressDialog.dismiss();
+    public Materiel getMateriel(){
+        return this.materiel;
     }
 
-    public static void setEtatColor(LinearLayout equipmentEtatLayout, String etat) {
+    //connecter le telephone en localhost ;)
 
-        if(etat.equals("bon"))
-            equipmentEtatLayout.setBackgroundColor(Color.GREEN);
-        else if(etat.equals("moyen"))
-            equipmentEtatLayout.setBackgroundColor(Color.YELLOW);
-        else if(etat.equals("reparation"))
-            equipmentEtatLayout.setBackgroundColor(Color.RED);
-        else if(etat.equals("detruit") || etat.equals("obsolete"))
-            equipmentEtatLayout.setBackgroundColor(Color.GRAY);
+    public final void getMateriel(final GetMaterielCallBack getMaterielCallBack, final Context context){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(URL + "materiel/"+this.id ).build();
+        Log.e("1992","blablablalbalalbzlbal : "+this.id);
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.err.println("Getting materiel failed .. Callback failure in MatarielBis class");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                Gson gson = new Gson();
+                Type collectionType = new TypeToken<Collection<Materiel>>(){}.getType();
+                Collection<Materiel> enums = gson.fromJson(result, collectionType);
+                Materiel[] materiels = enums.toArray(new Materiel[enums.size()]);
+                getMaterielCallBack.onSuccess(materiels);
+
+            }
+        });
     }
 
+    public interface GetMaterielCallBack {
+        public void onSuccess(Materiel[] materiel);
+        public void onFail();
+    }
+
+
+    public final void emprunterMateriel(final EmprunterMaterielCallBack emprunterMaterielCallBack){
+        OkHttpClient client = new OkHttpClient();
+        //System.out.println("ciciciciciciciciicicicicici " + this.id+"----"+this.id_materiel+"---"+this.etat_emprunt+"---"+this.id_emprunteur);
+        Request request = new Request.Builder().url(URL + "emprunt/"+this.id_materiel+"/"+this.etat_emprunt+"/"+this.id_emprunteur).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.err.println("Emprunter materiel failed .. Callback failure in MatarielBis class");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                emprunterMaterielCallBack.onSuccess("veuillez récuperer le materiel, prenez en soin !");
+            }
+        });
+    }
+
+
+    public interface EmprunterMaterielCallBack {
+        public void onSuccess(String msg);
+        public void onFail();
+    }
 }

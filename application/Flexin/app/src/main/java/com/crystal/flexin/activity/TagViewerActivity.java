@@ -15,7 +15,7 @@
  * An {@link Activity} which handles a broadcast of a new tag that the device just discovered.
  */
 
-package com.crystal.flexin;
+package com.crystal.flexin.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -31,8 +31,9 @@ import android.os.Parcelable;
 import android.provider.Settings;
 import android.widget.TextView;
 
+import com.crystal.flexin.R;
 import com.crystal.flexin.activity.EmpruntActivity;
-import com.crystal.flexin.activity.NFCSearchActivity;
+import com.crystal.flexin.activity.MaterielActivity;
 
 import java.nio.charset.Charset;
 import java.text.DateFormat;
@@ -44,8 +45,9 @@ import java.util.Locale;
 
 
 
- public class TagViewer extends Activity {
+ public class TagViewerActivity extends Activity {
 
+     public static final String MATERIEL_INTENT = "materiel";
      private static final DateFormat TIME_FORMAT = SimpleDateFormat.getDateTimeInstance();
     //private LinearLayout mTagContent;
 
@@ -142,6 +144,8 @@ import java.util.Locale;
             public void onClick(DialogInterface dialogInterface, int i) {
                 Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
                 startActivity(intent);
+                finish();
+
             }
         });
         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -178,19 +182,21 @@ import java.util.Locale;
                 mTags.add(tag);*/
                 Intent intent2 ;
                 if(!this.forEmprunt) {
-                    intent2 = new Intent(this, NFCSearchActivity.class);
-                    intent2.putExtra("tag", dumpTagData(tag));
+                    intent2 = new Intent(this, MaterielActivity.class);
+                    intent2.putExtra(MaterielActivity.TAG, dumpTagData(tag));
                     startActivity(intent2);
+                    finish();
                 }
                 //j'ai fait ici la cle primaire id de meme valeur que id_materiel
                 else{
                     intent2 = new Intent(this, EmpruntActivity.class);
-                    intent2.putExtra("id_emprunt",this.id_materiel);
+                    intent2.putExtra("id_emprunt",this.id_materiel); // pas besoin auto increment
                     intent2.putExtra("id_emprunteur", dumpTagData(tag));
                     intent2.putExtra("id_materiel",this.id_materiel);
                     intent2.putExtra("etat_emprunt",this.etat_emprunt);
 
                     startActivity(intent2);
+                    finish();
                 }
 
             }
@@ -205,7 +211,7 @@ import java.util.Locale;
         byte[] id = tag.getId();
         //sb.append("ID (hex): ").append(toHex(id)).append('\n');
         //sb.append("ID (reversed hex): ").append(toReversedHex(id)).append('\n');
-        sb.append("ID (dec): ").append(toDec(id)).append('\n');
+        sb.append(toDec(id)).append('\n');
         //sb.append("ID (reversed dec): ").append(toReversedDec(id)).append('\n');
 
         /*String prefix = "android.nfc.tech.";
@@ -522,4 +528,7 @@ import java.util.Locale;
         setIntent(intent);
         resolveIntent(intent);
     }
+
+
+
 }

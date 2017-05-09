@@ -9,6 +9,8 @@ import com.google.gson.annotations.Expose;
 public class Materiel {
 
     @Expose
+    public String id;
+    @Expose
     public String etat ;
     @Expose
     public String description ;

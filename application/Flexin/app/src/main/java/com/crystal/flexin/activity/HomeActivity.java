@@ -6,13 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.crystal.flexin.R;
-import com.crystal.flexin.TagViewer;
-import com.crystal.flexin.fragment.DialogTextSearchFragment;
-import com.crystal.flexin.manager.MaterielManager;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -20,12 +18,8 @@ import com.google.zxing.integration.android.IntentResult;
 public class HomeActivity extends Activity {
 
 
-    private ImageView searchTextButton;
     private ImageView searchScanButton;
     private ImageView searchNfcButton;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private RecyclerView homeActivityEquipmentRecyclerView;
-    private MaterielManager materielManager;
 
 
     @Override
@@ -37,23 +31,6 @@ public class HomeActivity extends Activity {
     }
 
     private void init(){
-        /*/
-        this.homeActivityEquipmentRecyclerView = (RecyclerView) findViewById(R.id.homeActivityMaterielRecyclerView);
-        this.homeActivityEquipmentRecyclerView.setHasFixedSize(true);
-        this.mLayoutManager = new LinearLayoutManager(this);
-        this.homeActivityEquipmentRecyclerView.setLayoutManager(mLayoutManager);
-        this.materielManager = new MaterielManager(findViewById(R.id.homeActivityMainLayout), this.homeActivityEquipmentRecyclerView);
-        this.materielManager.execute();*/
-
-        this.searchTextButton = (ImageView) findViewById(R.id.searchTextButton);
-        this.searchTextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                DialogFragment dialogTextSearchFragment = new DialogTextSearchFragment();
-                dialogTextSearchFragment.show(getFragmentManager(), "DialogTextSearchFragment");
-            }
-        });
 
         this.searchScanButton = (ImageView) findViewById(R.id.searchScanButton);
         this.searchScanButton.setOnClickListener(new View.OnClickListener() {
@@ -69,9 +46,10 @@ public class HomeActivity extends Activity {
         this.searchNfcButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), TagViewer.class);
+                Intent intent = new Intent(view.getContext(), TagViewerActivity.class);
                 intent.putExtra("forEmprunt", false);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -88,8 +66,11 @@ public class HomeActivity extends Activity {
             String scanFormat = scanningResult.getFormatName();
             if (scanContent != null && scanFormat != null) {
 
-                //TODO ouvre l'activité avec le bon élément.
-
+                Intent intent2 = new Intent(HomeActivity.this, MaterielActivity.class);
+                Log.e("1212", scanContent);
+                intent2.putExtra(MaterielActivity.TAG, scanContent);
+                startActivity(intent2);
+                finish();
             }
         }
     }

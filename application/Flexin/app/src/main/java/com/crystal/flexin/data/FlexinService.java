@@ -18,7 +18,7 @@ import retrofit2.http.Path;
  */
 public interface FlexinService {
 
-    String URL = "http://192.168.172.53:8080/"; //192.168.43.34
+    String URL = "http://192.168.43.34:8080/"; //192.168.43.34
 
 
     @GET("materiel/{id}")
