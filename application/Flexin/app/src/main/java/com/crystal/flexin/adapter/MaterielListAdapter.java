@@ -1,19 +1,5 @@
 package com.crystal.flexin.adapter;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.crystal.flexin.R;
-import com.crystal.flexin.manager.MaterielManager;
-import com.crystal.flexin.resources.Materiel;
-
-import java.util.List;
-
 
 /**
  * Created by basaile92 on 01/04/2017.

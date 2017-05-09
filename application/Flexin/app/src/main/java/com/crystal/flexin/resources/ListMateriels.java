@@ -1,6 +1,4 @@
-package com.crystal.flexin.data;
-
-import com.google.gson.annotations.SerializedName;
+package com.crystal.flexin.resources;
 
 import java.util.List;
 

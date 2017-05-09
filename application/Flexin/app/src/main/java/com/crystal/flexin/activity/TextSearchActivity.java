@@ -31,7 +31,7 @@ public class TextSearchActivity extends AppCompatActivity {
         this.mLayoutManager = new LinearLayoutManager(this);
         this.homeActivityEquipmentRecyclerView.setLayoutManager(mLayoutManager);
         this.materielManager = new MaterielManager(findViewById(R.id.homeActivityMainLayout), this.homeActivityEquipmentRecyclerView);
-        this.materielManager.execute();*/
+        this.materielManager.execute();
 
     }
 }

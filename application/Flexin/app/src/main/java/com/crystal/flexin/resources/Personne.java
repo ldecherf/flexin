@@ -1,4 +1,4 @@
-package com.crystal.flexin.data;
+package com.crystal.flexin.resources;
 
 /**
  * Created by aymane on 06/05/17.

@@ -1,6 +1,6 @@
 package com.crystal.flexin.activity;
 
-import com.crystal.flexin.data.Materiel;
+import com.crystal.flexin.resources.Materiel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

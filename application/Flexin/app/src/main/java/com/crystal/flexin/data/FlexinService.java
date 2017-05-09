@@ -1,14 +1,9 @@
 package com.crystal.flexin.data;
 
 import com.crystal.flexin.BuildConfig;
-import com.crystal.flexin.data.Materiel;
+import com.crystal.flexin.resources.ListMateriels;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

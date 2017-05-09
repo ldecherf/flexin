@@ -1,26 +1,20 @@
 package com.crystal.flexin.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.crystal.flexin.R;
 import com.crystal.flexin.TagViewer;
-import com.crystal.flexin.data.Materiel;
 import com.crystal.flexin.fragment.DialogTextSearchFragment;
 import com.crystal.flexin.manager.MaterielManager;
-
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 
 public class HomeActivity extends Activity {
@@ -29,8 +23,6 @@ public class HomeActivity extends Activity {
     private ImageView searchTextButton;
     private ImageView searchScanButton;
     private ImageView searchNfcButton;
-    private ImageView searchLocationButton;
-    private ImageView sortByButton;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView homeActivityEquipmentRecyclerView;
     private MaterielManager materielManager;
@@ -67,6 +59,8 @@ public class HomeActivity extends Activity {
         this.searchScanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                IntentIntegrator scanIntegrator = new IntentIntegrator(HomeActivity.this);
+                scanIntegrator.initiateScan();
 
             }
         });
@@ -81,22 +75,23 @@ public class HomeActivity extends Activity {
             }
         });
 
-        this.searchLocationButton = (ImageView) findViewById(R.id.searchLocationButton);
-        this.searchLocationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        //retrieve result of scanning - instantiate ZXing object
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        //check we have a valid result
+        if (scanningResult != null) {
+            //get content from Intent Result
+            String scanContent = scanningResult.getContents();
+            //get format name of data scanned
+            String scanFormat = scanningResult.getFormatName();
+            if (scanContent != null && scanFormat != null) {
+
+                //TODO ouvre l'activité avec le bon élément.
 
             }
-        });
-
-        this.sortByButton = (ImageView) findViewById(R.id.sortByButton);
-        this.sortByButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
+        }
     }
 
 

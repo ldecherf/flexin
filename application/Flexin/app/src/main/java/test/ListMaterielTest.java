@@ -1,10 +1,8 @@
 package test;
 
-import com.crystal.flexin.data.Emprunt;
-import com.crystal.flexin.data.FlexinService;
-import com.crystal.flexin.data.ListMateriels;
-import com.crystal.flexin.data.Materiel;
-import com.crystal.flexin.data.Personne;
+import com.crystal.flexin.resources.Emprunt;
+import com.crystal.flexin.resources.Materiel;
+import com.crystal.flexin.resources.Personne;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -14,12 +12,9 @@ import
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Collection;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import retrofit2.Call;
-import retrofit2.Response;
 
 import static junit.framework.Assert.assertEquals;
 

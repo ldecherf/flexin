@@ -1,7 +1,6 @@
 package com.crystal.flexin.activity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,19 +8,7 @@ import android.widget.TextView;
 
 import com.crystal.flexin.R;
 import com.crystal.flexin.TagViewer;
-import com.crystal.flexin.data.Materiel;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.Collection;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import com.crystal.flexin.resources.Materiel;
 
 public class NFCSearchActivity extends HomeActivity {
 

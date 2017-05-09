@@ -1,4 +1,4 @@
-package com.crystal.flexin.data;
+package com.crystal.flexin.resources;
 
 import com.google.gson.annotations.Expose;
 

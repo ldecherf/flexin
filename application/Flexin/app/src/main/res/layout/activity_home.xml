@@ -39,19 +39,6 @@
             android:layout_weight="1"
             android:src="@drawable/icon" />
 
-        <ImageView
-            android:id="@+id/searchLocationButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@android:drawable/ic_menu_mylocation" />
-
-        <ImageView
-            android:id="@+id/sortByButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@android:drawable/ic_menu_sort_alphabetically" />
     </LinearLayout>
 
     <TextView

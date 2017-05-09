@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import com.crystal.flexin.R;
 import com.crystal.flexin.adapter.MaterielListAdapter;
 import com.crystal.flexin.data.FlexinService;
-import com.crystal.flexin.data.Materiel;
+import com.crystal.flexin.resources.Materiel;
 
 import java.io.IOException;
 import java.util.List;
