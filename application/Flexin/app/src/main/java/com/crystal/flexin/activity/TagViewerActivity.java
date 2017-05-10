@@ -62,11 +62,13 @@ import java.util.Locale;
      private boolean forEmprunt ;
      private String id_materiel ;
      private String etat_emprunt ;
+     private boolean forConnexion ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         this.forEmprunt = intent.getExtras().getBoolean("forEmprunt");
+        this.forConnexion = intent.getExtras().getBoolean("forConnexion");
         setContentView(R.layout.tag_viewer);
         if(this.forEmprunt){
             TextView textView = (TextView) findViewById(R.id.tag_viewer_text);
@@ -74,6 +76,7 @@ import java.util.Locale;
             this.id_materiel = intent.getStringExtra("id_materiel");
             this.etat_emprunt = intent.getStringExtra("etat_emprunt");
         }
+
         //mTagContent = (LinearLayout) findViewById(R.id.list);
         resolveIntent(getIntent());
 
@@ -181,6 +184,12 @@ import java.util.Locale;
                 msgs = new NdefMessage[] { msg };
                 mTags.add(tag);*/
                 Intent intent2 ;
+                if(this.forConnexion){
+                    Intent intent0 = new Intent(this,HomeActivity.class);
+                    intent0.putExtra("usertag",dumpTagData(tag));
+                    startActivity(intent0);
+                }
+                else {
                 if(!this.forEmprunt) {
                     intent2 = new Intent(this, MaterielActivity.class);
                     intent2.putExtra(MaterielActivity.TAG, dumpTagData(tag));
@@ -197,6 +206,7 @@ import java.util.Locale;
 
                     startActivity(intent2);
                     finish();
+                }
                 }
 
             }

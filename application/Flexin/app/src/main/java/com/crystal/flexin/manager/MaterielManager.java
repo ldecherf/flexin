@@ -27,9 +27,10 @@ import okhttp3.Response;
 
 public class MaterielManager implements Serializable{
 
-    String URL = "http://192.168.43.34:8080/";
+    String URL = "http://192.168.172.61:8080/";
 
     private Materiel materiel ;
+    //id materiel for get materiel et rendre materiel et id emprunt for emprunter
     private String id ;
     private String id_materiel ;
     private String etat_emprunt ;
@@ -46,6 +47,12 @@ public class MaterielManager implements Serializable{
         this.id_emprunteur = id_emprunteur ;
     }
 
+    public MaterielManager(String id, String etat_emprunt){
+        //id materiel
+        this.id = id ;
+        this.etat_emprunt = etat_emprunt ;
+
+    }
     public void setMateriel(Materiel mat){
         this.materiel = mat ;
     }
@@ -89,6 +96,23 @@ public class MaterielManager implements Serializable{
         OkHttpClient client = new OkHttpClient();
         //System.out.println("ciciciciciciciciicicicicici " + this.id+"----"+this.id_materiel+"---"+this.etat_emprunt+"---"+this.id_emprunteur);
         Request request = new Request.Builder().url(URL + "emprunt/"+this.id_materiel+"/"+this.etat_emprunt+"/"+this.id_emprunteur).build();
+
+        // POUR METTRE A JOUR DISPONIBILITE
+        Request request2 = new Request.Builder().url(URL + "emprunt/"+this.id_materiel).build();
+
+        client.newCall(request2).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.err.println("mise a jour disponibilite emprunt failed .. Callback failure in MatarielBis class");
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+            }
+        });
+
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -107,4 +131,31 @@ public class MaterielManager implements Serializable{
         public void onSuccess(String msg);
         public void onFail();
     }
+
+
+
+
+    public final void rendreMateriel(final RendreMaterielCallBack rendreMaterielCallBack){
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder().url(URL + "rendre/"+this.id_materiel+"/"+this.etat_emprunt).build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.err.println("Rendre materiel failed .. Callback failure in MatarielBis class");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                rendreMaterielCallBack.onSuccess("Merci d'avoir rendu le materiel !");
+            }
+        });
+    }
+
+    public interface RendreMaterielCallBack {
+        public void onSuccess(String msg);
+        public void onFail();
+    }
+
 }

@@ -100,4 +100,16 @@
         android:layout_below="@+id/etat"
         android:layout_marginTop="18dp"
         android:text="Emprunter" />
+
+    <Button
+        android:id="@+id/rendrebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:text="Rendre"
+        android:layout_alignBaseline="@+id/emprunterbtn"
+        android:layout_alignBottom="@+id/emprunterbtn"
+        android:layout_toRightOf="@+id/emprunterbtn"
+        android:layout_toEndOf="@+id/emprunterbtn" />
 </RelativeLayout>

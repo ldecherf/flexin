@@ -22,6 +22,8 @@ public class Materiel {
     public String photo ;
     @Expose
     public String nom ;
+    @Expose
+    public String disponibilite ;
 
 
     public Materiel() { }

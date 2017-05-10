@@ -51,7 +51,16 @@ public class MaterielActivity extends HomeActivity {
                             referenceView.setText(materielManager.getMateriel().reference);
                             TextView nomView = (TextView) findViewById(R.id.nom);
                             nomView.setText(materielManager.getMateriel().nom);
+
+                            // JAI MODIFIE ICI POUR LE BOUTTON RENDRE
+
                             Button emprunterbtn = (Button) findViewById(R.id.emprunterbtn);
+                            Button rendrebtn = (Button) findViewById(R.id.rendrebtn);
+                            if(materiels[0].disponibilite.equals("disponible"))
+                                rendrebtn.setVisibility(View.GONE);
+                            else
+                                emprunterbtn.setVisibility(View.GONE);
+
                             emprunterbtn.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -62,6 +71,17 @@ public class MaterielActivity extends HomeActivity {
                                     intent.putExtra("id_materiel",id_materielView.getText());
                                     intent.putExtra("etat_emprunt",etatView.getText());
                                     startActivity(intent);
+                                    finish();
+                                }
+                            });
+
+                            rendrebtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(v.getContext(),RendreActivity.class);
+                                    intent.putExtra("id_materiel",materiels[0].id);
+                                    startActivity(intent);
+                                    finish();
                                 }
                             });
 
