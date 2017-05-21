@@ -16,4 +16,12 @@ public class Emprunt {
     public int id_emprunteur;
     @Expose
     public String emprunt;
+    @Expose
+    public String date_emprunt;
+    @Expose
+    public String heure_emprunt;
+    @Expose
+    public String date_retour;
+    @Expose
+    public String heure_retour;
 }

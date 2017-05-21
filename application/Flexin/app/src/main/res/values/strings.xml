@@ -20,4 +20,7 @@
     <string name="cancel">Annuler</string>
     <string name="searchTextDialogTitle">Recherche:</string>
     <string name="materielNotFoundError">Le matériel n\'existe pas dans la base données</string>
+    <string name="etatNotFilled">Veuillez remplir l\'état!</string>
+    <string name="emprunter">Emprunter</string>
+    <string name="rendre">Rendre</string>
 </resources>

@@ -2,6 +2,7 @@ package com.crystal.flexin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public class MaterielActivity extends HomeActivity {
 
 
                         if(materiels.length > 0) {
-                            setContentView(R.layout.activity_nfc_search);
+                            setContentView(R.layout.activity_materiel);
                             materielManager.setMateriel(materiels[0]);
                             TextView tagId = (TextView) findViewById(R.id.id);
                             tagId.setText(id);
@@ -54,36 +55,46 @@ public class MaterielActivity extends HomeActivity {
 
                             // JAI MODIFIE ICI POUR LE BOUTTON RENDRE
 
-                            Button emprunterbtn = (Button) findViewById(R.id.emprunterbtn);
-                            Button rendrebtn = (Button) findViewById(R.id.rendrebtn);
-                            if(materiels[0].disponibilite.equals("disponible"))
-                                rendrebtn.setVisibility(View.GONE);
-                            else
-                                emprunterbtn.setVisibility(View.GONE);
+                            Button changeStateButton = (Button) findViewById(R.id.changeStateButton);
+                            if(materiels[0].disponibilite.equals("disponible")){
 
-                            emprunterbtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    TextView id_materielView = (TextView) findViewById(R.id.id);
-                                    TextView etatView = (TextView) findViewById(R.id.etat);
-                                    Intent intent = new Intent(v.getContext(), TagViewerActivity.class);
-                                    intent.putExtra("forEmprunt", true);
-                                    intent.putExtra("id_materiel",id_materielView.getText());
-                                    intent.putExtra("etat_emprunt",etatView.getText());
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            });
 
-                            rendrebtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent(v.getContext(),RendreActivity.class);
-                                    intent.putExtra("id_materiel",materiels[0].id);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            });
+                                changeStateButton.setText(R.string.emprunter);
+                                changeStateButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                        TextView id_materielView = (TextView) findViewById(R.id.id);
+                                        TextView etatView = (TextView) findViewById(R.id.etat);
+                                        Intent intent = new Intent(v.getContext(), TagViewerActivity.class);
+                                        intent.putExtra("forEmprunt", true);
+                                        intent.putExtra("id_materiel",id_materielView.getText());
+                                        intent.putExtra("etat_emprunt",etatView.getText());
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+
+
+                            } else{
+
+                                changeStateButton.setText(R.string.rendre);
+                                changeStateButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                        Intent intent = new Intent(v.getContext(),RendreActivity.class);
+                                        intent.putExtra("id_materiel", id);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+
+
+                            }
+
+
+
 
                         }else{
 
@@ -107,9 +118,5 @@ public class MaterielActivity extends HomeActivity {
         }, getApplicationContext());
 
     }
-
-
-
-
 
 }

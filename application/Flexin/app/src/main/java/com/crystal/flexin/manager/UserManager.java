@@ -1,10 +1,13 @@
 package com.crystal.flexin.manager;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.TextView;
 
+import com.crystal.flexin.R;
 import com.crystal.flexin.resources.Materiel;
-import com.crystal.flexin.resources.Personne;
+import com.crystal.flexin.resources.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -19,45 +22,111 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Created by aymane on 10/05/17.
+ * Created by basaile92 on 21/05/2017.
  */
 
 public class UserManager {
 
 
-    String URL = "http://192.168.172.61:8080/";
-    private String id ;
 
-    public UserManager(String id){
-        this.id = id;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+
+    public UserManager(Context context){
+
+        this.preferences = context.getSharedPreferences("user", 0);
+        this.editor = this.preferences.edit();
+
     }
 
-    public final void getPersonne(final GetPesonneCallBack getPesonneCallBack){
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(URL + "personne/"+this.id ).build();
+    public void setUser(final String id){
 
-        client.newCall(request).enqueue(new Callback() {
+        final FetchingClass fetchingClass = new FetchingClass();
+        fetchingClass.fetchUser(id, new FetchingClass.FetchUserCallBack() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                System.err.println("Getting user Infos failed .. Callback failure in UserManager class");
+            public void onSuccess(User[] users) {
+
+                editor.putString("id", id);
+                editor.putString("name", users[0].getName());
+                editor.putString("firstname", users[0].getFirstName());
+                editor.putString("password", users[0].getPassword());
+                editor.putString("mail", users[0].getMail());
+                editor.putString("tel", users[0].getTel());
+
+                editor.commit();
+
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String result = response.body().string();
-                Gson gson = new Gson();
-                Type collectionType = new TypeToken<Collection<Personne>>(){}.getType();
-                Collection<Personne> enums = gson.fromJson(result, collectionType);
-                Personne[] personnes = enums.toArray(new Personne[enums.size()]);
-                getPesonneCallBack.onSuccess(personnes);
+            public void onFail() {
+                //TODO traiter le cas ou la connexion échoUE
+                System.err.println("utilisateur  non reconnu ");
 
             }
         });
     }
 
-    public interface GetPesonneCallBack {
-        public void onSuccess(Personne[] personne);
-        public void onFail();
+    public void unSetUser(){
+
+        this.editor.clear();
+        this.editor.commit();
     }
+
+    public User getUser(){
+        User user = new User();
+        user.setId(this.preferences.getString("id", null));
+        user.setName(this.preferences.getString("name", null));
+        user.setFirstName(this.preferences.getString("firstname", null));
+        user.setPassword(this.preferences.getString("password", null));
+        user.setMail(this.preferences.getString("mail", null));
+        user.setTel(this.preferences.getString("tel", null));
+
+        return user;
+    }
+
+    public boolean existsUser(){
+
+        User user = getUser();
+        return !(user.isNull());
+
+    }
+
+
+    private static class FetchingClass {
+
+        String URL = "http://192.168.43.34:8080/";
+
+        public final void fetchUser(String id, final FetchUserCallBack fetchUserCallBack ){
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().url(URL + "personne/"+id ).build();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    System.err.println("Getting User failed .. Callback failure in UserManagerBis class");
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String result = response.body().string();
+                    Gson gson = new Gson();
+                    Type collectionType = new TypeToken<Collection<User>>(){}.getType();
+                    Collection<User> enums = gson.fromJson(result, collectionType);
+                    User[] users = enums.toArray(new User[enums.size()]);
+                    fetchUserCallBack.onSuccess(users);
+                    Log.e("202002",users[0].getFirstName());
+
+                }
+            });
+        }
+
+        public interface FetchUserCallBack {
+            public void onSuccess(User[] users);
+            public void onFail();
+        }
+
+    }
+
+
 
 }

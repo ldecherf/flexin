@@ -27,7 +27,7 @@ import okhttp3.Response;
 
 public class MaterielManager implements Serializable{
 
-    String URL = "http://192.168.172.61:8080/";
+    String URL = "http://192.168.43.34:8080/";
 
     private Materiel materiel ;
     //id materiel for get materiel et rendre materiel et id emprunt for emprunter
@@ -137,8 +137,9 @@ public class MaterielManager implements Serializable{
 
     public final void rendreMateriel(final RendreMaterielCallBack rendreMaterielCallBack){
         OkHttpClient client = new OkHttpClient();
+        System.out.println("RENDRE MATERIEL HAHAAHHAHA " +this.id+"---"+this.etat_emprunt);
 
-        Request request = new Request.Builder().url(URL + "rendre/"+this.id_materiel+"/"+this.etat_emprunt).build();
+        Request request = new Request.Builder().url(URL + "rendre/"+this.id+"/"+this.etat_emprunt).build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override

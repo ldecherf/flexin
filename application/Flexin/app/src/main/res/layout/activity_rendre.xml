@@ -14,7 +14,7 @@
         tools:layout_editor_absoluteY="8dp">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/rendreEtatLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -26,36 +26,28 @@
             android:text="Etat du materiel a rendre : " />
 
         <EditText
-            android:id="@+id/rendre_etat"
+            android:id="@+id/rendreEtatEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView3"
-            android:layout_alignBottom="@+id/textView3"
+            android:layout_alignBaseline="@+id/rendreEtatLabel"
+            android:layout_alignBottom="@+id/rendreEtatLabel"
             android:layout_marginLeft="18dp"
             android:layout_marginStart="18dp"
-            android:layout_toEndOf="@+id/textView3"
-            android:layout_toRightOf="@+id/textView3"
+            android:layout_toEndOf="@+id/rendreEtatLabel"
+            android:layout_toRightOf="@+id/rendreEtatLabel"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name" />
 
         <Button
-            android:id="@+id/rendrebtn2"
+            android:id="@+id/rendreEtatButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView3"
-            android:layout_alignStart="@+id/textView3"
-            android:layout_below="@+id/rendre_etat"
+            android:layout_alignLeft="@+id/rendreEtatLabel"
+            android:layout_alignStart="@+id/rendreEtatLabel"
+            android:layout_below="@+id/rendreEtatEditText"
             android:layout_marginTop="25dp"
             android:text="Button" />
 
-        <TextView
-            android:id="@+id/rendremsg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="146dp"
-            android:text=""
-            android:layout_below="@+id/rendrebtn2"
-            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

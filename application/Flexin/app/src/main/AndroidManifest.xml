@@ -23,14 +23,7 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat">
-        <activity android:name=".activity.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activity.HomeActivity"/>
         <activity android:name=".activity.TagViewerActivity" />
         <activity android:name=".activity.MaterielActivity" />
         <activity android:name=".activity.EmpruntActivity" />
