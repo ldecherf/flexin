@@ -10,6 +10,14 @@ import com.crystal.flexin.manager.MaterielManager;
 
 public class EmpruntActivity extends AppCompatActivity {
 
+    public static final String ID_EMPRUNT = "id_emprunt";
+    public static final String ID_MATERIEL = "id_materiel";
+    public static final String ETAT_EMPRUNT = "etat_emprunt";
+    public static final String ID_EMPRUNTEUR = "id_emprunteur";
+
+
+
+
     private String id ;
     private String id_materiel ;
     private String etat_emprunt ;
@@ -21,10 +29,10 @@ public class EmpruntActivity extends AppCompatActivity {
         setContentView(R.layout.activity_emprunt);
 
         Intent intent = getIntent() ;
-        this.id = intent.getStringExtra("id_emprunt");
-        this.id_materiel = intent.getStringExtra("id_materiel");
-        this.etat_emprunt = intent.getStringExtra("etat_emprunt");
-        this.id_emprunteur = intent.getStringExtra("id_emprunteur");
+        this.id = intent.getStringExtra(ID_EMPRUNT);
+        this.id_materiel = intent.getStringExtra(ID_MATERIEL);
+        this.etat_emprunt = intent.getStringExtra(ETAT_EMPRUNT);
+        this.id_emprunteur = intent.getStringExtra(ID_EMPRUNTEUR);
 
         emprunterMateriel();
 

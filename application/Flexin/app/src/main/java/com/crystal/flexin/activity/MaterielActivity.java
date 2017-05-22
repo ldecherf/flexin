@@ -2,7 +2,6 @@ package com.crystal.flexin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,20 +39,19 @@ public class MaterielActivity extends HomeActivity {
                         if(materiels.length > 0) {
                             setContentView(R.layout.activity_materiel);
                             materielManager.setMateriel(materiels[0]);
-                            TextView tagId = (TextView) findViewById(R.id.id);
-                            tagId.setText(id);
-                            TextView etatView = (TextView) findViewById(R.id.etat);
-                            etatView.setText(materielManager.getMateriel().etat);
-                            TextView descripionView = (TextView) findViewById(R.id.description);
-                            descripionView.setText(materielManager.getMateriel().description);
-                            TextView platformeView = (TextView) findViewById(R.id.platforme);
-                            platformeView.setText(materielManager.getMateriel().plateforme);
-                            TextView referenceView = (TextView) findViewById(R.id.reference);
-                            referenceView.setText(materielManager.getMateriel().reference);
+                            TextView tagId = (TextView) findViewById(R.id.reference);
                             TextView nomView = (TextView) findViewById(R.id.nom);
-                            nomView.setText(materielManager.getMateriel().nom);
+                            TextView descripionView = (TextView) findViewById(R.id.description);
+                            TextView platformeView = (TextView) findViewById(R.id.platforme);
+                            TextView etatView = (TextView) findViewById(R.id.etat);
 
-                            // JAI MODIFIE ICI POUR LE BOUTTON RENDRE
+
+                            tagId.setText(id);
+                            nomView.setText(materielManager.getMateriel().nom);
+                            descripionView.setText(materielManager.getMateriel().description);
+                            platformeView.setText(materielManager.getMateriel().plateforme);
+                            etatView.setText(materielManager.getMateriel().etat);
+
 
                             Button changeStateButton = (Button) findViewById(R.id.changeStateButton);
                             if(materiels[0].disponibilite.equals("disponible")){
@@ -64,14 +62,15 @@ public class MaterielActivity extends HomeActivity {
                                     @Override
                                     public void onClick(View v) {
 
-                                        TextView id_materielView = (TextView) findViewById(R.id.id);
-                                        TextView etatView = (TextView) findViewById(R.id.etat);
+                                        //TODO: refaire ça sans scan
+                                        /*TextView id_materielView = (TextView) findViewById(R.id.id);
+                                        TextView etatView = (TextView) findViewById(R.id.etatLabel);
                                         Intent intent = new Intent(v.getContext(), TagViewerActivity.class);
                                         intent.putExtra("forEmprunt", true);
                                         intent.putExtra("id_materiel",id_materielView.getText());
                                         intent.putExtra("etat_emprunt",etatView.getText());
                                         startActivity(intent);
-                                        finish();
+                                        finish();*/
                                     }
                                 });
 
@@ -84,7 +83,7 @@ public class MaterielActivity extends HomeActivity {
                                     public void onClick(View v) {
 
                                         Intent intent = new Intent(v.getContext(),RendreActivity.class);
-                                        intent.putExtra("id_materiel", id);
+                                        intent.putExtra(EmpruntActivity.ID_MATERIEL, id);
                                         startActivity(intent);
                                         finish();
                                     }
@@ -118,5 +117,12 @@ public class MaterielActivity extends HomeActivity {
         }, getApplicationContext());
 
     }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(MaterielActivity.this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
 }

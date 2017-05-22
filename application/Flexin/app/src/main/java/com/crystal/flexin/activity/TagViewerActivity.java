@@ -34,6 +34,7 @@ import android.widget.TextView;
 import com.crystal.flexin.R;
 import com.crystal.flexin.activity.EmpruntActivity;
 import com.crystal.flexin.activity.MaterielActivity;
+import com.crystal.flexin.resources.Emprunt;
 
 import java.nio.charset.Charset;
 import java.text.DateFormat;
@@ -47,34 +48,42 @@ import java.util.Locale;
 
  public class TagViewerActivity extends Activity {
 
+     public static final String FORCONNEXION = "forConnexion";
+     public static final String FOREMPRUNT = "forEmprunt";
+
      public static final String MATERIEL_INTENT = "materiel";
      private static final DateFormat TIME_FORMAT = SimpleDateFormat.getDateTimeInstance();
     //private LinearLayout mTagContent;
-
-    private NfcAdapter mAdapter;
-    private PendingIntent mPendingIntent;
-    private NdefMessage mNdefPushMessage;
-
-    private AlertDialog mDialog;
-
-    private List<Tag> mTags = new ArrayList<Tag>();
+     private NfcAdapter mAdapter;
+     private PendingIntent mPendingIntent;
+     private NdefMessage mNdefPushMessage;
+     private AlertDialog mDialog;
+     private List<Tag> mTags = new ArrayList<Tag>();
 
      private boolean forEmprunt ;
      private String id_materiel ;
      private String etat_emprunt ;
      private boolean forConnexion ;
+     private Class fromWhere;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        this.forEmprunt = intent.getExtras().getBoolean("forEmprunt");
-        this.forConnexion = intent.getExtras().getBoolean("forConnexion");
+        this.forEmprunt = intent.getExtras().getBoolean(FOREMPRUNT);
+        this.forConnexion = intent.getExtras().getBoolean(FORCONNEXION);
         setContentView(R.layout.tag_viewer);
         if(this.forEmprunt){
             TextView textView = (TextView) findViewById(R.id.tag_viewer_text);
-            textView.setText("AUTHENTICATION .. En attente de scan ...");
-            this.id_materiel = intent.getStringExtra("id_materiel");
-            this.etat_emprunt = intent.getStringExtra("etat_emprunt");
+            textView.setText(R.string.scanMessage);
+            this.id_materiel = intent.getStringExtra(EmpruntActivity.ID_MATERIEL);
+            this.etat_emprunt = intent.getStringExtra(EmpruntActivity.ETAT_EMPRUNT);
+            this.fromWhere = HomeActivity.class;
+        }
+
+        if(this.forConnexion){
+
+            this.fromWhere = ConnectionActivity.class;
         }
 
         //mTagContent = (LinearLayout) findViewById(R.id.list);
@@ -188,6 +197,7 @@ import java.util.Locale;
                     Intent intent0 = new Intent(this,HomeActivity.class);
                     intent0.putExtra("usertag",dumpTagData(tag));
                     startActivity(intent0);
+                    finish();
                 }
                 else {
                 if(!this.forEmprunt) {
@@ -199,10 +209,10 @@ import java.util.Locale;
                 //j'ai fait ici la cle primaire id de meme valeur que id_materiel
                 else{
                     intent2 = new Intent(this, EmpruntActivity.class);
-                    intent2.putExtra("id_emprunt",this.id_materiel); // pas besoin auto increment
-                    intent2.putExtra("id_emprunteur", dumpTagData(tag));
-                    intent2.putExtra("id_materiel",this.id_materiel);
-                    intent2.putExtra("etat_emprunt",this.etat_emprunt);
+                    intent2.putExtra(EmpruntActivity.ID_EMPRUNT,this.id_materiel); // pas besoin auto increment
+                    intent2.putExtra(EmpruntActivity.ID_EMPRUNTEUR, dumpTagData(tag));
+                    intent2.putExtra(EmpruntActivity.ID_MATERIEL,this.id_materiel);
+                    intent2.putExtra(EmpruntActivity.ETAT_EMPRUNT,this.etat_emprunt);
 
                     startActivity(intent2);
                     finish();
@@ -539,6 +549,15 @@ import java.util.Locale;
         resolveIntent(intent);
     }
 
+     @Override
+     public void onBackPressed() {
+
+         Intent intent = new Intent(TagViewerActivity.this, this.fromWhere);
+         startActivity(intent);
+         finish();
+     }
+ }
 
 
-}
+
+

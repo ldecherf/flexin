@@ -2,11 +2,12 @@ package com.crystal.flexin.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.crystal.flexin.R;
@@ -19,98 +20,69 @@ import com.google.zxing.integration.android.IntentResult;
 public class HomeActivity extends Activity {
 
     //beaucoup de changement a verifier :/
-
-   // private ImageView searchScanButton;
-   // private ImageView searchNfcButton;
     private String usertag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Intent intent = getIntent() ;
-        this.usertag = intent.getStringExtra("usertag");
-        UserManager userManager = new UserManager(getApplicationContext());
-        /*userManager.setUser(usertag);
+        ImageButton searchScanButton = (ImageButton) findViewById(R.id.searchScanButton);
+        ImageButton searchNfcButton = (ImageButton) findViewById(R.id.searchNfcButton);
 
-        User user;
-        if(userManager.existsUser()){
-
-            user = userManager.getUser();
-            TextView text = (TextView) findViewById(R.id.textView);
-            text.setText("Welcome " + user.getFirstName() + " " + user.getName());
-        }
-*/
-
-        //init();
-        ImageView searchScanButton = (ImageView) findViewById(R.id.searchScanButton);
         searchScanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 IntentIntegrator scanIntegrator = new IntentIntegrator(HomeActivity.this);
                 scanIntegrator.initiateScan();
-
             }
         });
 
-        ImageView searchNfcButton = (ImageView) findViewById(R.id.searchNfcButton);
         searchNfcButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), TagViewerActivity.class);
-                intent.putExtra("forEmprunt", false);
+                intent.putExtra(TagViewerActivity.FOREMPRUNT, false);
                 startActivity(intent);
                 finish();
             }
         });
 
+
+        //Intent intent = getIntent() ;
+        //this.usertag = intent.getStringExtra("usertag");
+        /*
+        UserManager userManager = new UserManager(getApplicationContext());
+
+        userManager.setUser(usertag);
+
+        User user;
+        if(userManager.existsUser()){
+
+            user = userManager.getUser();
+            TextView text = (TextView) findViewById(R.id.welcomeMessageTextView);
+            text.setText("Welcome " + user.getFirstName() + " " + user.getName());
+        }
+        */
+
+
     }
-/*
+
     public void init(){
-        final UserManagerBis userManager= new UserManagerBis(this.usertag);
-        userManager.getPersonne(new UserManagerBis.GetPesonneCallBack() {
+     /*   final UserManager userManager= new UserManager(getApplicationContext());
+        userManager.getUser(new UserManager.FetchUserCallBack() {
 
             @Override
             public void onSuccess(User[] personne) {
 
-                InfoSession infoSession = new InfoSession(personne[0].nom,personne[0].mail,personne[0].tel);
-                //Fais ce que tu veux faire avec les infos de la personne connecte ici, pour creer un session
-
-                ImageView searchScanButton = (ImageView) findViewById(R.id.searchScanButton);
-                searchScanButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        IntentIntegrator scanIntegrator = new IntentIntegrator(HomeActivity.this);
-                        scanIntegrator.initiateScan();
-
-                    }
-                });
-
-                ImageView searchNfcButton = (ImageView) findViewById(R.id.searchNfcButton);
-                searchNfcButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(view.getContext(), TagViewerActivity.class);
-                        intent.putExtra("forEmprunt", false);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
             }
 
             @Override
             public void onFail() {
                 System.err.println("get User failed .. Callback failure in HomeActivity");
             }
-        });
+        });*/
     }
 
-    /*
-    private void init(){
-
-
-
-    }*/
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         //retrieve result of scanning - instantiate ZXing object
@@ -124,7 +96,6 @@ public class HomeActivity extends Activity {
             if (scanContent != null && scanFormat != null) {
 
                 Intent intent2 = new Intent(HomeActivity.this, MaterielActivity.class);
-                Log.e("1212", scanContent);
                 intent2.putExtra(MaterielActivity.TAG, scanContent);
                 startActivity(intent2);
                 finish();
@@ -132,6 +103,12 @@ public class HomeActivity extends Activity {
         }
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
+
+
+
+

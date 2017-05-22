@@ -1,53 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="right"
+    android:orientation="vertical"
+    android:padding="@dimen/little_padding"
     tools:context="com.crystal.flexin.activity.RendreActivity">
 
 
-    <RelativeLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="8dp">
 
         <TextView
             android:id="@+id/rendreEtatLabel"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="27dp"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="37dp"
-            android:text="Etat du materiel a rendre : " />
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentTop="false"
+            android:layout_weight="0.5"
+            android:text="@string/etatRendreLabel" />
 
         <EditText
             android:id="@+id/rendreEtatEditText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/rendreEtatLabel"
-            android:layout_alignBottom="@+id/rendreEtatLabel"
-            android:layout_marginLeft="18dp"
-            android:layout_marginStart="18dp"
-            android:layout_toEndOf="@+id/rendreEtatLabel"
-            android:layout_toRightOf="@+id/rendreEtatLabel"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:layout_weight="0.5"
+            android:inputType="textCapSentences" />
 
-        <Button
-            android:id="@+id/rendreEtatButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/rendreEtatLabel"
-            android:layout_alignStart="@+id/rendreEtatLabel"
-            android:layout_below="@+id/rendreEtatEditText"
-            android:layout_marginTop="25dp"
-            android:text="Button" />
+    </LinearLayout>
 
-    </RelativeLayout>
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/rendreEtatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/rendreEtatLabel"
+        android:layout_alignStart="@+id/rendreEtatLabel"
+        android:layout_below="@+id/rendreEtatEditText"
+        android:layout_marginTop="25dp"
+        android:text="@string/rendre" />
+
+</LinearLayout>

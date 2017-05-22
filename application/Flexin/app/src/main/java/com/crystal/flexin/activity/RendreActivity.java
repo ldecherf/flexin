@@ -28,7 +28,7 @@ public class RendreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rendre);
 
         Intent intent = getIntent();
-        this.id_materiel = intent.getStringExtra("id_materiel");
+        this.id_materiel = intent.getStringExtra(EmpruntActivity.ID_MATERIEL);
         rendreEtatEditText = (TextView) findViewById(R.id.rendreEtatEditText);
         rendreEtatButton = (Button) findViewById(R.id.rendreEtatButton);
 
@@ -74,4 +74,13 @@ public class RendreActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(RendreActivity.this, MaterielActivity.class);
+        intent.putExtra(MaterielActivity.TAG, this.id_materiel);
+        startActivity(intent);
+        finish();
+    }
+
 }

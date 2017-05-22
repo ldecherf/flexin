@@ -23,4 +23,18 @@
     <string name="etatNotFilled">Veuillez remplir l\'état!</string>
     <string name="emprunter">Emprunter</string>
     <string name="rendre">Rendre</string>
+    <string name="connexion">Se connecter</string>
+    <string name="guest">Invité</string>
+    <string name="connexionModeText">Choisissez votre mode de connexion:</string>
+    <string name="welcomeMessageText">WELCOME TO FLEXIN !</string>
+    <string name="scanBarCodeTitle">Scanner Code Barre</string>
+    <string name="scanNFCTitle">Scanner NFC</string>
+    <string name="authentificationMessage">AUTHENTICATION .. En attente de scan ...</string>
+    <string name="scanMessage">AUTHENTICATION .. En attente de scan ...</string>
+    <string name="reference">Reference :</string>
+    <string name="nom">Nom:</string>
+    <string name="description">Description:</string>
+    <string name="plateforme">Plateforme:</string>
+    <string name="etat">État:</string>
+    <string name="etatRendreLabel">Etat du materiel a rendre :</string>
 </resources>
