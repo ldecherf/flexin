@@ -1,10 +1,6 @@
 package test;
 
-import com.crystal.flexin.manager.UserManagerBis;
-import com.crystal.flexin.resources.Emprunt;
 import com.crystal.flexin.resources.Materiel;
-import com.crystal.flexin.resources.User;
-import com.crystal.flexin.resources.Userbis;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -24,7 +20,7 @@ import static junit.framework.Assert.assertEquals;
  * Created by aymane on 22/03/17.
  */
 public class ListMaterielTest {
-/*
+
     @Test
     public void getMaterielTest() throws IOException {
 
@@ -38,7 +34,7 @@ public class ListMaterielTest {
         Materiel[] materiels = enums.toArray(new Materiel[enums.size()]);
         assertEquals(materiels[0].nom,"Souris");
     }
-*/
+/*
     @Test
     public void userTest() throws IOException {
 
@@ -51,7 +47,9 @@ public class ListMaterielTest {
         Collection<User> enums = gson.fromJson(result, collectionType);
         User[] users = enums.toArray(new User[enums.size()]);
         assertEquals(users[0].getFirstName(),"Aymane");
-    }
+    }*/
+
+
 /*
     @Test
     public void emprunterTest() throws IOException {

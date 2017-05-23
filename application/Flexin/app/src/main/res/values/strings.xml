@@ -37,4 +37,8 @@
     <string name="plateforme">Plateforme:</string>
     <string name="etat">État:</string>
     <string name="etatRendreLabel">Etat du materiel a rendre :</string>
+    <string name="connect">Se connecter</string>
+    <string name="username">Username</string>
+    <string name="disconnect">Se déconnecter</string>
+    <string name="changeconnect">Changer d\'utilisateur</string>
 </resources>

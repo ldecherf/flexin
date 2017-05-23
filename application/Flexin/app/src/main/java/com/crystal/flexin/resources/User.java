@@ -2,11 +2,13 @@ package com.crystal.flexin.resources;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by aymane on 06/05/17.
  */
 
-public class User {
+public class User implements Serializable{
 
     private String id;    
     private String name ;
@@ -14,6 +16,7 @@ public class User {
     private String password;
     private String mail ;
     private String tel ;
+
 
     public void setId(String id) {
         this.id = id;

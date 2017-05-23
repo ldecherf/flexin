@@ -2,26 +2,27 @@ package com.crystal.flexin.resources;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
 /**
  * Created by aymane on 05/05/17.
  */
 
-public class Emprunt {
+public class Emprunt implements Serializable{
 
-    @Expose
-    public int id;
-    @Expose
-    public int id_materiel;
-    @Expose
-    public int id_emprunteur;
-    @Expose
-    public String emprunt;
-    @Expose
+    public String id;
+    public String id_materiel;
+    public String id_emprunteur;
+    public String etat_emprunt;
     public String date_emprunt;
-    @Expose
-    public String heure_emprunt;
-    @Expose
     public String date_retour;
-    @Expose
-    public String heure_retour;
+
+    public Emprunt(String id, String id_materiel, String id_emprunteur, String etat_emprunt, String date_emprunt, String date_retour) {
+        this.id = id;
+        this.id_materiel = id_materiel;
+        this.id_emprunteur = id_emprunteur;
+        this.etat_emprunt = etat_emprunt;
+        this.date_emprunt = date_emprunt;
+        this.date_retour = date_retour;
+    }
 }

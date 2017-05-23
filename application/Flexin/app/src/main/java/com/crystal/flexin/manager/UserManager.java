@@ -1,11 +1,14 @@
 package com.crystal.flexin.manager;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.crystal.flexin.R;
+import com.crystal.flexin.activity.HomeActivity;
 import com.crystal.flexin.resources.Materiel;
 import com.crystal.flexin.resources.User;
 import com.google.gson.Gson;
@@ -28,7 +31,6 @@ import okhttp3.Response;
 public class UserManager {
 
 
-
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
 
@@ -39,21 +41,33 @@ public class UserManager {
 
     }
 
-    public void setUser(final String id){
+    public void setUser(final String id, final HomeActivity activity){
 
         final FetchingClass fetchingClass = new FetchingClass();
         fetchingClass.fetchUser(id, new FetchingClass.FetchUserCallBack() {
             @Override
-            public void onSuccess(User[] users) {
+            public void onSuccess(final User[] users) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(users.length>0) {
+                            User user = users[0];
+                            editor.putString("id", id);
+                            editor.putString("name", user.getName());
+                            editor.putString("firstname", user.getFirstName());
+                            editor.putString("password", user.getPassword());
+                            editor.putString("mail", user.getMail());
+                            editor.putString("tel", user.getTel());
 
-                editor.putString("id", id);
-                editor.putString("name", users[0].getName());
-                editor.putString("firstname", users[0].getFirstName());
-                editor.putString("password", users[0].getPassword());
-                editor.putString("mail", users[0].getMail());
-                editor.putString("tel", users[0].getTel());
+                            editor.commit();
 
-                editor.commit();
+                            Intent intent = new Intent(activity.getApplicationContext(), activity.getClass());
+                            activity.startActivity(intent);
+                            activity.finish();
+                        }
+
+                    }
+                });
 
             }
 
@@ -92,7 +106,7 @@ public class UserManager {
     }
 
 
-    private static class FetchingClass {
+    public static class FetchingClass {
 
         String URL = "http://192.168.43.34:8080/";
 
@@ -114,7 +128,6 @@ public class UserManager {
                     Collection<User> enums = gson.fromJson(result, collectionType);
                     User[] users = enums.toArray(new User[enums.size()]);
                     fetchUserCallBack.onSuccess(users);
-                    Log.e("202002",users[0].getFirstName());
 
                 }
             });

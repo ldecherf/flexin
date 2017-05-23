@@ -29,12 +29,9 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
-import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
 
 import com.crystal.flexin.R;
-import com.crystal.flexin.activity.EmpruntActivity;
-import com.crystal.flexin.activity.MaterielActivity;
-import com.crystal.flexin.resources.Emprunt;
 
 import java.nio.charset.Charset;
 import java.text.DateFormat;
@@ -46,23 +43,17 @@ import java.util.Locale;
 
 
 
- public class TagViewerActivity extends Activity {
+ public class TagViewerActivity extends AppCompatActivity {
 
      public static final String FORCONNEXION = "forConnexion";
      public static final String FOREMPRUNT = "forEmprunt";
 
-     public static final String MATERIEL_INTENT = "materiel";
-     private static final DateFormat TIME_FORMAT = SimpleDateFormat.getDateTimeInstance();
-    //private LinearLayout mTagContent;
      private NfcAdapter mAdapter;
      private PendingIntent mPendingIntent;
      private NdefMessage mNdefPushMessage;
      private AlertDialog mDialog;
      private List<Tag> mTags = new ArrayList<Tag>();
 
-     private boolean forEmprunt ;
-     private String id_materiel ;
-     private String etat_emprunt ;
      private boolean forConnexion ;
      private Class fromWhere;
 
@@ -70,23 +61,16 @@ import java.util.Locale;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        this.forEmprunt = intent.getExtras().getBoolean(FOREMPRUNT);
         this.forConnexion = intent.getExtras().getBoolean(FORCONNEXION);
         setContentView(R.layout.tag_viewer);
-        if(this.forEmprunt){
-            TextView textView = (TextView) findViewById(R.id.tag_viewer_text);
-            textView.setText(R.string.scanMessage);
-            this.id_materiel = intent.getStringExtra(EmpruntActivity.ID_MATERIEL);
-            this.etat_emprunt = intent.getStringExtra(EmpruntActivity.ETAT_EMPRUNT);
-            this.fromWhere = HomeActivity.class;
-        }
-
         if(this.forConnexion){
 
             this.fromWhere = ConnectionActivity.class;
+        }else{
+
+            this.fromWhere = HomeActivity.class;
         }
 
-        //mTagContent = (LinearLayout) findViewById(R.id.list);
         resolveIntent(getIntent());
 
         mDialog = new AlertDialog.Builder(this).setNeutralButton("Ok", null).create();
@@ -183,15 +167,8 @@ import java.util.Locale;
                 }
             } else {
                 // Unknown tag type
-                //byte[] empty = new byte[0];
-                //byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
+
                 Tag tag = (Tag) intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                /*byte[] payload = dumpTagData(tag).getBytes();
-                System.out.println("ceciiii est uuun taggggg ....... " + dumpTagData(tag));
-                NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload);
-                NdefMessage msg = new NdefMessage(new NdefRecord[] { record });
-                msgs = new NdefMessage[] { msg };
-                mTags.add(tag);*/
                 Intent intent2 ;
                 if(this.forConnexion){
                     Intent intent0 = new Intent(this,HomeActivity.class);
@@ -200,28 +177,14 @@ import java.util.Locale;
                     finish();
                 }
                 else {
-                if(!this.forEmprunt) {
                     intent2 = new Intent(this, MaterielActivity.class);
                     intent2.putExtra(MaterielActivity.TAG, dumpTagData(tag));
                     startActivity(intent2);
                     finish();
-                }
-                //j'ai fait ici la cle primaire id de meme valeur que id_materiel
-                else{
-                    intent2 = new Intent(this, EmpruntActivity.class);
-                    intent2.putExtra(EmpruntActivity.ID_EMPRUNT,this.id_materiel); // pas besoin auto increment
-                    intent2.putExtra(EmpruntActivity.ID_EMPRUNTEUR, dumpTagData(tag));
-                    intent2.putExtra(EmpruntActivity.ID_MATERIEL,this.id_materiel);
-                    intent2.putExtra(EmpruntActivity.ETAT_EMPRUNT,this.etat_emprunt);
 
-                    startActivity(intent2);
-                    finish();
-                }
                 }
 
             }
-            // Setup the views
-            //buildTagViews(msgs);
 
         }
     }
@@ -229,196 +192,12 @@ import java.util.Locale;
     private String dumpTagData(Tag tag) {
         StringBuilder sb = new StringBuilder();
         byte[] id = tag.getId();
-        //sb.append("ID (hex): ").append(toHex(id)).append('\n');
-        //sb.append("ID (reversed hex): ").append(toReversedHex(id)).append('\n');
-        sb.append(toDec(id)).append('\n');
-        //sb.append("ID (reversed dec): ").append(toReversedDec(id)).append('\n');
+                sb.append(toDec(id)).append('\n');
 
-        /*String prefix = "android.nfc.tech.";
-        sb.append("Technologies: ");
-        for (String tech : tag.getTechList()) {
-            sb.append(tech.substring(prefix.length()));
-            sb.append(", ");
-        }
-        sb.delete(sb.length() - 2, sb.length());
-        for (String tech : tag.getTechList()) {
-            if (tech.equals(MifareClassic.class.getName())) {
-                sb.append('\n');
-                String type = "Unknown";
-                try {
-                    MifareClassic mifareTag;
-                    try {
-                        mifareTag = MifareClassic.get(tag);
-                    } catch (Exception e) {
-                        // Fix for Sony Xperia Z3/Z5 phones
-                        tag = cleanupTag(tag);
-                        mifareTag = MifareClassic.get(tag);
-                    }
-                    switch (mifareTag.getType()) {
-                    case MifareClassic.TYPE_CLASSIC:
-                        type = "Classic";
-                        break;
-                    case MifareClassic.TYPE_PLUS:
-                        type = "Plus";
-                        break;
-                    case MifareClassic.TYPE_PRO:
-                        type = "Pro";
-                        break;
-                    }
-                    sb.append("Mifare Classic type: ");
-                    sb.append(type);
-                    sb.append('\n');
-
-                    sb.append("Mifare size: ");
-                    sb.append(mifareTag.getSize() + " bytes");
-                    sb.append('\n');
-
-                    sb.append("Mifare sectors: ");
-                    sb.append(mifareTag.getSectorCount());
-                    sb.append('\n');
-
-                    sb.append("Mifare blocks: ");
-                    sb.append(mifareTag.getBlockCount());
-                } catch (Exception e) {
-                    sb.append("Mifare classic error: " + e.getMessage());
-                }
-            }
-
-            if (tech.equals(MifareUltralight.class.getName())) {
-                sb.append('\n');
-                MifareUltralight mifareUlTag = MifareUltralight.get(tag);
-                String type = "Unknown";
-                switch (mifareUlTag.getType()) {
-                case MifareUltralight.TYPE_ULTRALIGHT:
-                    type = "Ultralight";
-                    break;
-                case MifareUltralight.TYPE_ULTRALIGHT_C:
-                    type = "Ultralight C";
-                    break;
-                }
-                sb.append("Mifare Ultralight type: ");
-                sb.append(type);
-            }
-        }*/
 
         return sb.toString();
     }
-/*
-    private Tag cleanupTag(Tag oTag) {
-        if (oTag == null)
-            return null;
 
-        String[] sTechList = oTag.getTechList();
-
-        Parcel oParcel = Parcel.obtain();
-        oTag.writeToParcel(oParcel, 0);
-        oParcel.setDataPosition(0);
-
-        int len = oParcel.readInt();
-        byte[] id = null;
-        if (len >= 0) {
-            id = new byte[len];
-            oParcel.readByteArray(id);
-        }
-        int[] oTechList = new int[oParcel.readInt()];
-        oParcel.readIntArray(oTechList);
-        Bundle[] oTechExtras = oParcel.createTypedArray(Bundle.CREATOR);
-        int serviceHandle = oParcel.readInt();
-        int isMock = oParcel.readInt();
-        IBinder tagService;
-        if (isMock == 0) {
-            tagService = oParcel.readStrongBinder();
-        } else {
-            tagService = null;
-        }
-        oParcel.recycle();
-
-        int nfca_idx = -1;
-        int mc_idx = -1;
-        short oSak = 0;
-        short nSak = 0;
-
-        for (int idx = 0; idx < sTechList.length; idx++) {
-            if (sTechList[idx].equals(NfcA.class.getName())) {
-                if (nfca_idx == -1) {
-                    nfca_idx = idx;
-                    if (oTechExtras[idx] != null && oTechExtras[idx].containsKey("sak")) {
-                        oSak = oTechExtras[idx].getShort("sak");
-                        nSak = oSak;
-                    }
-                } else {
-                    if (oTechExtras[idx] != null && oTechExtras[idx].containsKey("sak")) {
-                        nSak = (short) (nSak | oTechExtras[idx].getShort("sak"));
-                    }
-                }
-            } else if (sTechList[idx].equals(MifareClassic.class.getName())) {
-                mc_idx = idx;
-            }
-        }
-
-        boolean modified = false;
-
-        if (oSak != nSak) {
-            oTechExtras[nfca_idx].putShort("sak", nSak);
-            modified = true;
-        }
-
-        if (nfca_idx != -1 && mc_idx != -1 && oTechExtras[mc_idx] == null) {
-            oTechExtras[mc_idx] = oTechExtras[nfca_idx];
-            modified = true;
-        }
-
-        if (!modified) {
-            return oTag;
-        }
-
-        Parcel nParcel = Parcel.obtain();
-        nParcel.writeInt(id.length);
-        nParcel.writeByteArray(id);
-        nParcel.writeInt(oTechList.length);
-        nParcel.writeIntArray(oTechList);
-        nParcel.writeTypedArray(oTechExtras, 0);
-        nParcel.writeInt(serviceHandle);
-        nParcel.writeInt(isMock);
-        if (isMock == 0) {
-            nParcel.writeStrongBinder(tagService);
-        }
-        nParcel.setDataPosition(0);
-
-        Tag nTag = Tag.CREATOR.createFromParcel(nParcel);
-
-        nParcel.recycle();
-
-        return nTag;
-    }*/
-/*
-    private String toHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = bytes.length - 1; i >= 0; --i) {
-            int b = bytes[i] & 0xff;
-            if (b < 0x10)
-                sb.append('0');
-            sb.append(Integer.toHexString(b));
-            if (i > 0) {
-                sb.append(" ");
-            }
-        }
-        return sb.toString();
-    }
-
-    private String toReversedHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < bytes.length; ++i) {
-            if (i > 0) {
-                sb.append(" ");
-            }
-            int b = bytes[i] & 0xff;
-            if (b < 0x10)
-                sb.append('0');
-            sb.append(Integer.toHexString(b));
-        }
-        return sb.toString();
-    }*/
 
     private long toDec(byte[] bytes) {
         long result = 0;
@@ -431,117 +210,7 @@ import java.util.Locale;
         return result;
     }
 
-/*    private long toReversedDec(byte[] bytes) {
-        long result = 0;
-        long factor = 1;
-        for (int i = bytes.length - 1; i >= 0; --i) {
-            long value = bytes[i] & 0xffl;
-            result += value * factor;
-            factor *= 256l;
-        }
-        return result;
-    }
 
-    void buildTagViews(NdefMessage[] msgs) {
-        if (msgs == null || msgs.length == 0) {
-            return;
-        }
-        LayoutInflater inflater = LayoutInflater.from(this);
-        LinearLayout content = mTagContent;
-
-        // Parse the first message in the list
-        // Build views for all of the sub records
-        List<ParsedNdefRecord> records = NdefMessageParser.parse(msgs[0]);
-        final int size = records.size();
-        for (int i = 0; i < size; i++) {
-            ParsedNdefRecord record = records.get(i);
-            content.addView(record.getView(this, inflater, content, i), 1 + i);
-            content.addView(inflater.inflate(R.layout.tag_divider, content, false), 2 + i);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (mTags.size() == 0) {
-            Toast.makeText(this, R.string.nothing_scanned, Toast.LENGTH_LONG).show();
-            return true;
-        }
-
-        switch (item.getItemId()) {
-        case R.id.menu_main_clear:
-            clearTags();
-            return true;
-        case R.id.menu_copy_dec:
-            copyIds(getIdsDec());
-            return true;
-        default:
-            return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void clearTags() {
-        mTags.clear();
-        for (int i = mTagContent.getChildCount() -1; i >= 0 ; i--) {
-            View view = mTagContent.getChildAt(i);
-            if (view.getId() != R.id.tag_viewer_text) {
-                mTagContent.removeViewAt(i);
-            }
-        }
-    }
-
-    private void copyIds(String text) {
-        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText("NFC IDs", text);
-        clipboard.setPrimaryClip(clipData);
-        Toast.makeText(this, mTags.size() + " IDs copied", Toast.LENGTH_SHORT).show();
-    }
-
-    private String getIdsHex() {
-        StringBuilder builder = new StringBuilder();
-        for (Tag tag : mTags) {
-            builder.append(toHex(tag.getId()));
-            builder.append('\n');
-        }
-        builder.setLength(builder.length() - 1); // Remove last new line
-        return builder.toString().replace(" ", "");
-    }
-
-    private String getIdsReversedHex() {
-        StringBuilder builder = new StringBuilder();
-        for (Tag tag : mTags) {
-            builder.append(toReversedHex(tag.getId()));
-            builder.append('\n');
-        }
-        builder.setLength(builder.length() - 1); // Remove last new line
-        return builder.toString().replace(" ", "");
-    }
-
-    private String getIdsDec() {
-        StringBuilder builder = new StringBuilder();
-        for (Tag tag : mTags) {
-            builder.append(toDec(tag.getId()));
-            builder.append('\n');
-        }
-        builder.setLength(builder.length() - 1); // Remove last new line
-        return builder.toString();
-    }
-
-    private String getIdsReversedDec() {
-        StringBuilder builder = new StringBuilder();
-        for (Tag tag : mTags) {
-            builder.append(toReversedDec(tag.getId()));
-            builder.append('\n');
-        }
-        builder.setLength(builder.length() - 1); // Remove last new line
-        return builder.toString();
-    }*/
 
     @Override
     public void onNewIntent(Intent intent) {

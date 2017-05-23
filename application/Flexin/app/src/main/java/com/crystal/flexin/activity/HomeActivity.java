@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -17,70 +20,23 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends AppCompatActivity {
 
-    //beaucoup de changement a verifier :/
     private String usertag;
+    private UserManager userManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.userManager = new UserManager(getApplicationContext());
+        Intent intent = getIntent() ;
+        this.usertag = intent.getStringExtra("usertag");
+        this.userManager.setUser(usertag, this);
         setContentView(R.layout.activity_home);
-        ImageButton searchScanButton = (ImageButton) findViewById(R.id.searchScanButton);
-        ImageButton searchNfcButton = (ImageButton) findViewById(R.id.searchNfcButton);
 
-        searchScanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                IntentIntegrator scanIntegrator = new IntentIntegrator(HomeActivity.this);
-                scanIntegrator.initiateScan();
-            }
-        });
-
-        searchNfcButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), TagViewerActivity.class);
-                intent.putExtra(TagViewerActivity.FOREMPRUNT, false);
-                startActivity(intent);
-                finish();
-            }
-        });
+        updateView();
 
 
-        //Intent intent = getIntent() ;
-        //this.usertag = intent.getStringExtra("usertag");
-        /*
-        UserManager userManager = new UserManager(getApplicationContext());
-
-        userManager.setUser(usertag);
-
-        User user;
-        if(userManager.existsUser()){
-
-            user = userManager.getUser();
-            TextView text = (TextView) findViewById(R.id.welcomeMessageTextView);
-            text.setText("Welcome " + user.getFirstName() + " " + user.getName());
-        }
-        */
-
-
-    }
-
-    public void init(){
-     /*   final UserManager userManager= new UserManager(getApplicationContext());
-        userManager.getUser(new UserManager.FetchUserCallBack() {
-
-            @Override
-            public void onSuccess(User[] personne) {
-
-            }
-
-            @Override
-            public void onFail() {
-                System.err.println("get User failed .. Callback failure in HomeActivity");
-            }
-        });*/
     }
 
 
@@ -107,6 +63,93 @@ public class HomeActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+
+    public void updateView() {
+
+        ImageButton searchScanButton = (ImageButton) findViewById(R.id.searchScanButton);
+        ImageButton searchNfcButton = (ImageButton) findViewById(R.id.searchNfcButton);
+
+        searchScanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentIntegrator scanIntegrator = new IntentIntegrator(HomeActivity.this);
+                scanIntegrator.initiateScan();
+            }
+        });
+
+        searchNfcButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), TagViewerActivity.class);
+                intent.putExtra(TagViewerActivity.FOREMPRUNT, false);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+
+
+
+        User user;
+        if(this.userManager.existsUser()){
+
+            user = this.userManager.getUser();
+            TextView text = (TextView) findViewById(R.id.welcomeMessageTextView);
+            text.setText("Welcome " + user.getFirstName() + " " + user.getName());
+        }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        MenuItem userNameMenuItem = menu.findItem(R.id.username);
+        MenuItem connexionStateMenuItem = menu.findItem(R.id.connexionState);
+
+
+        if(this.userManager.existsUser()) {
+
+
+            User user = this.userManager.getUser();
+            userNameMenuItem.setTitle(user.getFirstName() + " " + user.getName());
+            connexionStateMenuItem.setTitle(R.string.changeconnect);
+
+
+        }else {
+
+            userNameMenuItem.setTitle(R.string.guest);
+            connexionStateMenuItem.setTitle(R.string.connect);
+
+        }
+
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.connexionState:{
+
+                if (this.userManager.existsUser()) {
+
+                    this.userManager.unSetUser();
+                }
+                Intent intent = new Intent(getApplicationContext(), ConnectionActivity.class);
+                startActivity(intent);
+                finish();
+
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
 }
 
 
