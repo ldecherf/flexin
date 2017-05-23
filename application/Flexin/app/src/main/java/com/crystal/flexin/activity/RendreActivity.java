@@ -1,27 +1,21 @@
 package com.crystal.flexin.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.icu.util.GregorianCalendar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crystal.flexin.R;
-import com.crystal.flexin.manager.MaterielManager;
 import com.crystal.flexin.manager.RendreManager;
 import com.crystal.flexin.manager.UserManager;
 import com.crystal.flexin.resources.Emprunt;
 import com.crystal.flexin.resources.User;
-
-import org.w3c.dom.Text;
 
 public class RendreActivity extends AppCompatActivity {
 
@@ -87,6 +81,8 @@ public class RendreActivity extends AppCompatActivity {
                     @Override
                     public void onFail() {
 
+                        Toast.makeText(getApplicationContext(), R.string.errorConnection, Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
@@ -95,6 +91,7 @@ public class RendreActivity extends AppCompatActivity {
             @Override
             public void onFail() {
 
+                Toast.makeText(getApplicationContext(), R.string.errorConnection, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -1,15 +1,12 @@
 package com.crystal.flexin.manager;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crystal.flexin.R;
 import com.crystal.flexin.activity.HomeActivity;
-import com.crystal.flexin.resources.Materiel;
 import com.crystal.flexin.resources.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -23,10 +20,6 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-/**
- * Created by basaile92 on 21/05/2017.
- */
 
 public class UserManager {
 
@@ -73,8 +66,7 @@ public class UserManager {
 
             @Override
             public void onFail() {
-                //TODO traiter le cas ou la connexion échoUE
-                System.err.println("utilisateur  non reconnu ");
+                Toast.makeText(activity, R.string.errorConnection, Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -1,7 +1,5 @@
 package com.crystal.flexin.manager;
 
-import android.icu.util.GregorianCalendar;
-
 import com.crystal.flexin.resources.Emprunt;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,9 +14,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created by basaile92 on 22/05/2017.
- */
 
 public class RendreManager {
 

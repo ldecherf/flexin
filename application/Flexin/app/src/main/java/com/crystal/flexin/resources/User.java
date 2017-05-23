@@ -1,12 +1,6 @@
 package com.crystal.flexin.resources;
-
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
-/**
- * Created by aymane on 06/05/17.
- */
 
 public class User implements Serializable{
 

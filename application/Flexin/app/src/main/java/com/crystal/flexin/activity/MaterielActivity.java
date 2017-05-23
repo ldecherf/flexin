@@ -1,11 +1,9 @@
 package com.crystal.flexin.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.icu.util.GregorianCalendar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -173,7 +171,8 @@ public class MaterielActivity extends AppCompatActivity {
 
             @Override
             public void onFail() {
-                System.err.println("Emprunter materiel failed .. Callback failure in EmpruntActivity");
+
+                Toast.makeText(getApplicationContext(), R.string.errorConnection, Toast.LENGTH_SHORT).show();
             }
         });
     }

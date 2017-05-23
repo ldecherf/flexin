@@ -1,12 +1,9 @@
 package com.crystal.flexin.activity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,16 +38,15 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        //retrieve result of scanning - instantiate ZXing object
+        //Partie code barre
+        //Récupere le résultat du scan
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        //check we have a valid result
+        //Vérifie le résultat
         if (scanningResult != null) {
-            //get content from Intent Result
+            //Récupere le contenu du scan
             String scanContent = scanningResult.getContents();
-            //get format name of data scanned
             String scanFormat = scanningResult.getFormatName();
             if (scanContent != null && scanFormat != null) {
-
                 Intent intent2 = new Intent(HomeActivity.this, MaterielActivity.class);
                 intent2.putExtra(MaterielActivity.TAG, scanContent);
                 startActivity(intent2);
@@ -66,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void updateView() {
-
+        //Met à jour la tous les élements de l'activité
         ImageButton searchScanButton = (ImageButton) findViewById(R.id.searchScanButton);
         ImageButton searchNfcButton = (ImageButton) findViewById(R.id.searchNfcButton);
 
@@ -88,10 +84,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
         User user;
         if(this.userManager.existsUser()){
 
@@ -104,6 +96,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        //Initialise la barre de menu
         getMenuInflater().inflate(R.menu.menu, menu);
 
         MenuItem userNameMenuItem = menu.findItem(R.id.username);
@@ -131,6 +124,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //Initialise les actions des boutons de la barre de menu
         switch (item.getItemId()){
             case R.id.connexionState:{
 

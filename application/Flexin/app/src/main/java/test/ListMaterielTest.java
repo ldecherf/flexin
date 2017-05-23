@@ -16,9 +16,6 @@ import okhttp3.Request;
 
 import static junit.framework.Assert.assertEquals;
 
-/**
- * Created by aymane on 22/03/17.
- */
 public class ListMaterielTest {
 
     @Test

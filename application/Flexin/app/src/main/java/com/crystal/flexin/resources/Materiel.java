@@ -1,8 +1,5 @@
 package com.crystal.flexin.resources;
 
-
-import com.google.gson.annotations.Expose;
-
 import java.io.Serializable;
 
 /**

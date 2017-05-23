@@ -1,11 +1,6 @@
 package com.crystal.flexin.manager;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.crystal.flexin.R;
 import com.crystal.flexin.resources.Materiel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,9 +16,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created by aymane on 01/05/17.
- */
 
 public class MaterielManager implements Serializable{
 
@@ -57,7 +49,7 @@ public class MaterielManager implements Serializable{
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                System.err.println("Getting materiel failed .. Callback failure in MaterielBis class");
+                System.err.println("Getting materiel failed .. ");
             }
 
             @Override

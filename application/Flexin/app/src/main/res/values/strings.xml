@@ -41,4 +41,5 @@
     <string name="username">Username</string>
     <string name="disconnect">Se déconnecter</string>
     <string name="changeconnect">Changer d\'utilisateur</string>
+    <string name="errorConnection">Problème de connexion</string>
 </resources>

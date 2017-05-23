@@ -17,7 +17,6 @@
 
 package com.crystal.flexin.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
@@ -34,8 +33,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.crystal.flexin.R;
 
 import java.nio.charset.Charset;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;

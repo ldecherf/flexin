@@ -2,8 +2,6 @@ package com.crystal.flexin.manager;
 
 import android.icu.util.GregorianCalendar;
 
-import com.crystal.flexin.resources.Materiel;
-
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -11,10 +9,6 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-/**
- * Created by basaile92 on 22/05/2017.
- */
 
 public class EmpruntManager {
 
@@ -40,7 +34,7 @@ public class EmpruntManager {
         client.newCall(requestCreerEmprunt).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                System.err.println("Emprunter materiel failed .. Callback failure in MatarielBis class");
+                System.err.println("Emprunter materiel failed ..");
             }
 
             @Override
@@ -52,7 +46,7 @@ public class EmpruntManager {
         client.newCall(requestMajDisp).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                System.err.println("mise a jour disponibilite emprunt failed .. Callback failure in MatarielBis class");
+                System.err.println("Mise a jour disponibilite emprunt failed ");
 
             }
 

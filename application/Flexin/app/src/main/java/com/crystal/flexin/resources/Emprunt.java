@@ -1,12 +1,7 @@
 package com.crystal.flexin.resources;
 
-import com.google.gson.annotations.Expose;
-
 import java.io.Serializable;
 
-/**
- * Created by aymane on 05/05/17.
- */
 
 public class Emprunt implements Serializable{
 
