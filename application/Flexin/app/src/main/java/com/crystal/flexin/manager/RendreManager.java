@@ -1,5 +1,6 @@
 package com.crystal.flexin.manager;
 
+import com.crystal.flexin.activity.MaterielActivity;
 import com.crystal.flexin.resources.Emprunt;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,15 +18,13 @@ import okhttp3.Response;
 
 public class RendreManager {
 
-    String URL = "http://192.168.43.34:8080/";
-
 
     public final void rendreMateriel(String id_materiel,String etat_emprunt,String id_emprunt,String date_retour, final RendreMaterielCallBack rendreMaterielCallBack){
         OkHttpClient client = new OkHttpClient();
 
 
-        Request requestRendreDisp = new Request.Builder().url(URL + "rendre_disp/"+id_materiel+"/"+etat_emprunt).build();
-        Request requestRendreUpdate = new Request.Builder().url(URL + "rendre_update/"+id_emprunt+"/"+date_retour).build();
+        Request requestRendreDisp = new Request.Builder().url(MaterielActivity.URL + "rendre_disp/"+id_materiel+"/"+etat_emprunt).build();
+        Request requestRendreUpdate = new Request.Builder().url(MaterielActivity.URL + "rendre_update/"+id_emprunt+"/"+date_retour).build();
 
 
 
@@ -61,7 +60,7 @@ public class RendreManager {
 
     public final void getIdEmprunt(String id_materiel,String id_emprunteur, final IdEmpruntFetchCallBack idEmpruntFetchCallBack ){
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(URL + "get_id_emprunt/"+id_materiel+"/"+id_emprunteur).build();
+        Request request = new Request.Builder().url(MaterielActivity.URL + "get_id_emprunt/"+id_materiel+"/"+id_emprunteur).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

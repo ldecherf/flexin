@@ -22,6 +22,9 @@ import com.crystal.flexin.resources.User;
 
 public class MaterielActivity extends AppCompatActivity {
 
+    public static String URL = "http://192.168.43.34:8080/";
+
+
     public static final String TAG = "tag";
     private String tag;
     @Override

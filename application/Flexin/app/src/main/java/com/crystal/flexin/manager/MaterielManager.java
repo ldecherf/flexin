@@ -1,6 +1,8 @@
 package com.crystal.flexin.manager;
 
 import android.content.Context;
+
+import com.crystal.flexin.activity.MaterielActivity;
 import com.crystal.flexin.resources.Materiel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -18,8 +20,6 @@ import okhttp3.Response;
 
 
 public class MaterielManager implements Serializable{
-
-    String URL = "http://192.168.43.34:8080/";
 
     private Materiel materiel ;
     //id materiel for get materiel
@@ -45,7 +45,7 @@ public class MaterielManager implements Serializable{
 
     public final void getMateriel(final GetMaterielCallBack getMaterielCallBack, final Context context){
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(URL + "materiel/"+this.id ).build();
+        Request request = new Request.Builder().url(MaterielActivity.URL + "materiel/"+this.id ).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

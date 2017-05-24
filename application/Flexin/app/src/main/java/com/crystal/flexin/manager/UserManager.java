@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.crystal.flexin.R;
 import com.crystal.flexin.activity.HomeActivity;
+import com.crystal.flexin.activity.MaterielActivity;
 import com.crystal.flexin.resources.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -100,12 +101,10 @@ public class UserManager {
 
     public static class FetchingClass {
 
-        String URL = "http://192.168.43.34:8080/";
-
         public final void fetchUser(String id, final FetchUserCallBack fetchUserCallBack ){
 
             OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder().url(URL + "personne/"+id ).build();
+            Request request = new Request.Builder().url(MaterielActivity.URL + "personne/"+id ).build();
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {

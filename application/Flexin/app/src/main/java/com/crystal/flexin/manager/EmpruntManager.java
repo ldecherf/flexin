@@ -2,6 +2,8 @@ package com.crystal.flexin.manager;
 
 import android.icu.util.GregorianCalendar;
 
+import com.crystal.flexin.activity.MaterielActivity;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -11,8 +13,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class EmpruntManager {
-
-    String URL = "http://192.168.43.34:8080/";
 
     private String id_materiel ;
     private String etat_emprunt ;
@@ -28,8 +28,8 @@ public class EmpruntManager {
 
     public final void emprunterMateriel(final EmprunterMaterielCallBack emprunterMaterielCallBack){
         OkHttpClient client = new OkHttpClient();
-        Request requestCreerEmprunt = new Request.Builder().url(URL + "empruntcreer/"+this.id_materiel+"/"+this.etat_emprunt+"/"+this.id_emprunteur+"/"+this.date).build();
-        Request requestMajDisp = new Request.Builder().url(URL + "empruntdisp/"+this.id_materiel).build();
+        Request requestCreerEmprunt = new Request.Builder().url(MaterielActivity.URL + "empruntcreer/"+this.id_materiel+"/"+this.etat_emprunt+"/"+this.id_emprunteur+"/"+this.date).build();
+        Request requestMajDisp = new Request.Builder().url(MaterielActivity.URL + "empruntdisp/"+this.id_materiel).build();
 
         client.newCall(requestCreerEmprunt).enqueue(new Callback() {
             @Override
