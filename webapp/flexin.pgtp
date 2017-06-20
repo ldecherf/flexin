@@ -1,0 +1,1519 @@
+<Project colorSchemeName="facebook" copySystemFiles="true" localizationFileName="C:\Program Files\SQL Maestro Group\PostgreSQL PHP Generator Professional\lang.en.php" outputFilesExtension="php" outputPath="Z:\Library\WebServer\Documents\flexin" phpDriver="1" version="16.9.0.5" productVersion="16.9.0.5">
+  <DataSources>
+    <DataSource name="public.n_categories"/>
+    <DataSource name="public.n_etats"/>
+    <DataSource name="public.n_sous_categories"/>
+    <DataSource name="public.n_types_references"/>
+    <DataSource name="public.infrastructure"/>
+    <DataSource name="req_equipement" type="query">
+      <PrimaryKeyFields>
+        <Field name="cle"/>
+      </PrimaryKeyFields>
+      <SelectStatement>
+SELECT
+      equipement.cle,
+      equipement.nom,
+      cle_rangement,
+      photo,
+      cle_etat,
+      description,
+      n_categories.cle as cle_categorie,
+      cle_sous_categorie,
+      cle_infrastructure
+FROM
+    equipement,n_categories,n_sous_categories
+WHERE
+     equipement.cle_sous_categorie = n_sous_categories.cle
+AND  n_sous_categories.cle_categorie = n_categories.cle      </SelectStatement>
+      <InsertStatements>
+        <Statement>
+INSERT INTO equipement(
+nom,
+cle_rangement,
+photo,
+cle_etat,
+description,
+cle_sous_categorie,
+cle_infrastructure
+) VALUES(
+:nom,
+:cle_rangement,
+:photo,
+:cle_etat,
+:description,
+:cle_sous_categorie,
+:cle_infrastructure)        </Statement>
+      </InsertStatements>
+      <UpdateStatements>
+        <Statement>
+UPDATE 
+       equipement 
+SET
+    nom = :nom,
+    cle_rangement = :cle_rangement,
+    photo = :photo,
+    cle_etat = :cle_etat,
+    description = :description,
+    cle_sous_categorie = :cle_sous_categorie,
+    cle_infrastructure = :cle_infrastructure
+WHERE
+     cle = :cle        </Statement>
+      </UpdateStatements>
+      <DeleteStatements>
+        <Statement>
+DELETE FROM equipement WHERE cle = :cle        </Statement>
+      </DeleteStatements>
+    </DataSource>
+  </DataSources>
+  <Presentation disableMagicQuotesRuntime="false" menuMode="1" showEnvironmentVariables="false" showExecutedQueries="false" showPHPErrorsAndWarnings="false">
+    <Pages>
+      <Page NavigatorPosition="2" addSeparator="false" caption="Families" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="n_categories" groupName="Classifications" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="Families" showKeyColumnsImagesInGridHeader="false" tableName="public.n_categories" type="table" useActionImages="true">
+        <BeforeGridText/>
+        <DetailedDescription/>
+        <ColumnPresentations>
+          <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+            <ViewProperties type="text">
+              <Format thousandSeparator="," type="number"/>
+            </ViewProperties>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Name" fieldName="nom" selectedFilterOperators="1589247" showColumnFilter="false">
+            <ViewProperties type="text"/>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+        </ColumnPresentations>
+        <Columns>
+          <List>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </List>
+          <View>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </View>
+          <Edit>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Edit>
+          <Insert>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Insert>
+          <QuickFilter>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </QuickFilter>
+          <FilterBuilder>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </FilterBuilder>
+          <Print>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Print>
+          <Export>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Export>
+          <Compare>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom" visible="false"/>
+          </Compare>
+        </Columns>
+        <Details>
+          <Detail caption="N Sous Categories">
+            <Page NavigatorPosition="2" addSeparator="false" caption="N Sous Categories" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="n_sous_categories" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="N Sous Categories" showKeyColumnsImagesInGridHeader="false" tableName="public.n_sous_categories" type="table" useActionImages="true">
+              <BeforeGridText/>
+              <DetailedDescription/>
+              <ColumnPresentations>
+                <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Nom" fieldName="nom" selectedFilterOperators="1589247" showColumnFilter="false">
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Categorie" fieldName="cle_categorie" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_categories" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+              </ColumnPresentations>
+              <Columns>
+                <List>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_categorie"/>
+                </List>
+                <View>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_categorie"/>
+                </View>
+                <Edit>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_categorie"/>
+                </Edit>
+                <Insert>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_categorie"/>
+                </Insert>
+                <QuickFilter>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_categorie"/>
+                </QuickFilter>
+                <FilterBuilder>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_categorie"/>
+                </FilterBuilder>
+                <Print>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_categorie"/>
+                </Print>
+                <Export>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_categorie"/>
+                </Export>
+                <Compare>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_categorie"/>
+                </Compare>
+              </Columns>
+              <Details/>
+              <RecordPermissions useRecordPermissions="false"/>
+              <PartitionNavigators/>
+            </Page>
+            <MasterForeignKeyColumnMap>
+              <FieldMap foreginColumnName="cle_categorie" masterColumnName="cle"/>
+            </MasterForeignKeyColumnMap>
+          </Detail>
+        </Details>
+        <RecordPermissions useRecordPermissions="false"/>
+        <PartitionNavigators/>
+      </Page>
+      <Page NavigatorPosition="2" addSeparator="false" caption="Status" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="n_etats" groupName="Classifications" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="Status" showKeyColumnsImagesInGridHeader="false" tableName="public.n_etats" type="table" useActionImages="true">
+        <BeforeGridText/>
+        <DetailedDescription/>
+        <ColumnPresentations>
+          <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+            <ViewProperties type="text">
+              <Format thousandSeparator="," type="number"/>
+            </ViewProperties>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Name" fieldName="nom" selectedFilterOperators="1589247" showColumnFilter="false">
+            <ViewProperties type="text"/>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+        </ColumnPresentations>
+        <Columns>
+          <List>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </List>
+          <View>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </View>
+          <Edit>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Edit>
+          <Insert>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Insert>
+          <QuickFilter>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </QuickFilter>
+          <FilterBuilder>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </FilterBuilder>
+          <Print>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Print>
+          <Export>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Export>
+          <Compare>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom" visible="false"/>
+          </Compare>
+        </Columns>
+        <Details>
+          <Detail caption="Emprunt">
+            <Page NavigatorPosition="2" addSeparator="false" caption="Emprunt" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="emprunt" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="Emprunt" showKeyColumnsImagesInGridHeader="false" tableName="public.emprunt" type="table" useActionImages="true">
+              <BeforeGridText/>
+              <DetailedDescription/>
+              <ColumnPresentations>
+                <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Equipement" fieldName="cle_equipement" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.equipement" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Personne" fieldName="cle_personne" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Date Emprunt" fieldName="date_emprunt" selectedFilterOperators="2031871">
+                  <ViewProperties dateTimeKind="1" type="dateTime"/>
+                  <EditProperties dateTimeFormat="d-m-Y" dateTimeKind="1" firstDayOfWeek="0" type="dateTime"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Date Retour Prevue" fieldName="date_retour_prevue" selectedFilterOperators="2031871">
+                  <ViewProperties dateTimeKind="1" type="dateTime"/>
+                  <EditProperties dateTimeFormat="d-m-Y" dateTimeKind="1" firstDayOfWeek="0" type="dateTime"/>
+                </ColumnPresentation>
+                <ColumnPresentation canSetNull="true" caption="Date Retour" fieldName="date_retour" selectedFilterOperators="2031871">
+                  <ViewProperties dateTimeKind="1" type="dateTime"/>
+                  <EditProperties dateTimeFormat="d-m-Y" dateTimeKind="1" firstDayOfWeek="0" type="dateTime"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Etat Emprunt" fieldName="etat_emprunt" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_etats" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Etat Retour" fieldName="etat_retour" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_etats" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+              </ColumnPresentations>
+              <Columns>
+                <List>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </List>
+                <View>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </View>
+                <Edit>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </Edit>
+                <Insert>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </Insert>
+                <QuickFilter>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </QuickFilter>
+                <FilterBuilder>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </FilterBuilder>
+                <Print>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </Print>
+                <Export>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </Export>
+                <Compare>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </Compare>
+              </Columns>
+              <Details/>
+              <RecordPermissions useRecordPermissions="false"/>
+              <PartitionNavigators/>
+            </Page>
+            <MasterForeignKeyColumnMap>
+              <FieldMap foreginColumnName="etat_emprunt" masterColumnName="cle"/>
+            </MasterForeignKeyColumnMap>
+          </Detail>
+          <Detail caption="Emprunt">
+            <Page NavigatorPosition="2" addSeparator="false" caption="Emprunt" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="emprunt" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="1" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="Emprunt" showKeyColumnsImagesInGridHeader="false" tableName="public.emprunt" type="table" useActionImages="true">
+              <BeforeGridText/>
+              <DetailedDescription/>
+              <ColumnPresentations>
+                <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Equipement" fieldName="cle_equipement" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.equipement" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Personne" fieldName="cle_personne" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Date Emprunt" fieldName="date_emprunt" selectedFilterOperators="2031871">
+                  <ViewProperties dateTimeKind="1" type="dateTime"/>
+                  <EditProperties dateTimeFormat="d-m-Y" dateTimeKind="1" firstDayOfWeek="0" type="dateTime"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Date Retour Prevue" fieldName="date_retour_prevue" selectedFilterOperators="2031871">
+                  <ViewProperties dateTimeKind="1" type="dateTime"/>
+                  <EditProperties dateTimeFormat="d-m-Y" dateTimeKind="1" firstDayOfWeek="0" type="dateTime"/>
+                </ColumnPresentation>
+                <ColumnPresentation canSetNull="true" caption="Date Retour" fieldName="date_retour" selectedFilterOperators="2031871">
+                  <ViewProperties dateTimeKind="1" type="dateTime"/>
+                  <EditProperties dateTimeFormat="d-m-Y" dateTimeKind="1" firstDayOfWeek="0" type="dateTime"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Etat Emprunt" fieldName="etat_emprunt" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_etats" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Etat Retour" fieldName="etat_retour" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_etats" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+              </ColumnPresentations>
+              <Columns>
+                <List>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </List>
+                <View>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </View>
+                <Edit>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </Edit>
+                <Insert>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </Insert>
+                <QuickFilter>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </QuickFilter>
+                <FilterBuilder>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </FilterBuilder>
+                <Print>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </Print>
+                <Export>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </Export>
+                <Compare>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="cle_equipement"/>
+                  <Column fieldName="cle_personne"/>
+                  <Column fieldName="date_emprunt"/>
+                  <Column fieldName="date_retour_prevue"/>
+                  <Column fieldName="date_retour"/>
+                  <Column fieldName="etat_emprunt"/>
+                  <Column fieldName="etat_retour"/>
+                </Compare>
+              </Columns>
+              <Details/>
+              <RecordPermissions useRecordPermissions="false"/>
+              <PartitionNavigators/>
+            </Page>
+            <MasterForeignKeyColumnMap>
+              <FieldMap foreginColumnName="etat_retour" masterColumnName="cle"/>
+            </MasterForeignKeyColumnMap>
+          </Detail>
+          <Detail caption="Equipement">
+            <Page NavigatorPosition="2" addSeparator="false" caption="Equipement" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="equipement" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="Equipement" showKeyColumnsImagesInGridHeader="false" tableName="public.equipement" type="table" useActionImages="true">
+              <BeforeGridText/>
+              <DetailedDescription/>
+              <ColumnPresentations>
+                <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Nom" fieldName="nom" selectedFilterOperators="1589247" showColumnFilter="false">
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Rangement" fieldName="cle_rangement" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation canSetNull="true" caption="Photo" fieldName="photo" selectedFilterOperators="1589247" showColumnFilter="false">
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Etat" fieldName="cle_etat" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_etats" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation canSetNull="true" caption="Description" fieldName="description" selectedFilterOperators="1589247" showColumnFilter="false">
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Sous Categorie" fieldName="cle_sous_categorie" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_sous_categories" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Infrastructure" fieldName="cle_infrastructure" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.infrastructure" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+              </ColumnPresentations>
+              <Columns>
+                <List>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </List>
+                <View>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </View>
+                <Edit>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Edit>
+                <Insert>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Insert>
+                <QuickFilter>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </QuickFilter>
+                <FilterBuilder>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </FilterBuilder>
+                <Print>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Print>
+                <Export>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Export>
+                <Compare>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Compare>
+              </Columns>
+              <Details/>
+              <RecordPermissions useRecordPermissions="false"/>
+              <PartitionNavigators/>
+            </Page>
+            <MasterForeignKeyColumnMap>
+              <FieldMap foreginColumnName="cle_etat" masterColumnName="cle"/>
+            </MasterForeignKeyColumnMap>
+          </Detail>
+        </Details>
+        <RecordPermissions useRecordPermissions="false"/>
+        <PartitionNavigators/>
+      </Page>
+      <Page NavigatorPosition="2" addSeparator="false" caption="Product types" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="n_sous_categories" groupName="Classifications" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="Product types" showKeyColumnsImagesInGridHeader="false" tableName="public.n_sous_categories" type="table" useActionImages="true">
+        <BeforeGridText/>
+        <DetailedDescription/>
+        <ColumnPresentations>
+          <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+            <ViewProperties type="text">
+              <Format thousandSeparator="," type="number"/>
+            </ViewProperties>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Name" fieldName="nom" selectedFilterOperators="1589247" showColumnFilter="false">
+            <ViewProperties type="text"/>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Family" fieldName="cle_categorie" selectedFilterOperators="1589247">
+            <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_categories" useLookupOrdering="true"/>
+            <ViewProperties type="text"/>
+            <EditProperties type="comboBox"/>
+          </ColumnPresentation>
+        </ColumnPresentations>
+        <Columns>
+          <List>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_categorie"/>
+          </List>
+          <View>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_categorie"/>
+          </View>
+          <Edit>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_categorie"/>
+          </Edit>
+          <Insert>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_categorie"/>
+          </Insert>
+          <QuickFilter>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_categorie"/>
+          </QuickFilter>
+          <FilterBuilder>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_categorie"/>
+          </FilterBuilder>
+          <Print>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_categorie"/>
+          </Print>
+          <Export>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_categorie"/>
+          </Export>
+          <Compare>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom" visible="false"/>
+            <Column fieldName="cle_categorie" visible="false"/>
+          </Compare>
+        </Columns>
+        <Details>
+          <Detail caption="Equipement">
+            <Page NavigatorPosition="2" addSeparator="false" caption="Equipement" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="equipement" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="Equipement" showKeyColumnsImagesInGridHeader="false" tableName="public.equipement" type="table" useActionImages="true">
+              <BeforeGridText/>
+              <DetailedDescription/>
+              <ColumnPresentations>
+                <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Nom" fieldName="nom" selectedFilterOperators="1589247" showColumnFilter="false">
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Rangement" fieldName="cle_rangement" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation canSetNull="true" caption="Photo" fieldName="photo" selectedFilterOperators="1589247" showColumnFilter="false">
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Etat" fieldName="cle_etat" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_etats" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation canSetNull="true" caption="Description" fieldName="description" selectedFilterOperators="1589247" showColumnFilter="false">
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Sous Categorie" fieldName="cle_sous_categorie" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_sous_categories" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Infrastructure" fieldName="cle_infrastructure" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.infrastructure" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+              </ColumnPresentations>
+              <Columns>
+                <List>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </List>
+                <View>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </View>
+                <Edit>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Edit>
+                <Insert>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Insert>
+                <QuickFilter>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </QuickFilter>
+                <FilterBuilder>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </FilterBuilder>
+                <Print>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Print>
+                <Export>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Export>
+                <Compare>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Compare>
+              </Columns>
+              <Details/>
+              <RecordPermissions useRecordPermissions="false"/>
+              <PartitionNavigators/>
+            </Page>
+            <MasterForeignKeyColumnMap>
+              <FieldMap foreginColumnName="cle_sous_categorie" masterColumnName="cle"/>
+            </MasterForeignKeyColumnMap>
+          </Detail>
+        </Details>
+        <RecordPermissions useRecordPermissions="false"/>
+        <PartitionNavigators/>
+      </Page>
+      <Page NavigatorPosition="2" addSeparator="false" caption="ID types" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="n_types_references" groupName="Classifications" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="ID types" showKeyColumnsImagesInGridHeader="false" tableName="public.n_types_references" type="table" useActionImages="true">
+        <BeforeGridText/>
+        <DetailedDescription/>
+        <ColumnPresentations>
+          <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+            <ViewProperties type="text">
+              <Format thousandSeparator="," type="number"/>
+            </ViewProperties>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="name" fieldName="nom" selectedFilterOperators="1589247" showColumnFilter="false">
+            <ViewProperties type="text"/>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+        </ColumnPresentations>
+        <Columns>
+          <List>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </List>
+          <View>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </View>
+          <Edit>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Edit>
+          <Insert>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Insert>
+          <QuickFilter>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </QuickFilter>
+          <FilterBuilder>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </FilterBuilder>
+          <Print>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Print>
+          <Export>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+          </Export>
+          <Compare>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom" visible="false"/>
+          </Compare>
+        </Columns>
+        <Details>
+          <Detail caption="Reference">
+            <Page NavigatorPosition="2" addSeparator="false" caption="Reference" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="reference" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="Reference" showKeyColumnsImagesInGridHeader="false" tableName="public.reference" type="table" useActionImages="true">
+              <BeforeGridText/>
+              <DetailedDescription/>
+              <ColumnPresentations>
+                <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Intitule" fieldName="intitule" selectedFilterOperators="1589247" showColumnFilter="false">
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Type Reference" fieldName="cle_type_reference" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_types_references" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+              </ColumnPresentations>
+              <Columns>
+                <List>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="intitule"/>
+                  <Column fieldName="cle_type_reference"/>
+                </List>
+                <View>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="intitule"/>
+                  <Column fieldName="cle_type_reference"/>
+                </View>
+                <Edit>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="intitule"/>
+                  <Column fieldName="cle_type_reference"/>
+                </Edit>
+                <Insert>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="intitule"/>
+                  <Column fieldName="cle_type_reference"/>
+                </Insert>
+                <QuickFilter>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="intitule"/>
+                  <Column fieldName="cle_type_reference"/>
+                </QuickFilter>
+                <FilterBuilder>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="intitule"/>
+                  <Column fieldName="cle_type_reference"/>
+                </FilterBuilder>
+                <Print>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="intitule"/>
+                  <Column fieldName="cle_type_reference"/>
+                </Print>
+                <Export>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="intitule"/>
+                  <Column fieldName="cle_type_reference"/>
+                </Export>
+                <Compare>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="intitule"/>
+                  <Column fieldName="cle_type_reference"/>
+                </Compare>
+              </Columns>
+              <Details/>
+              <RecordPermissions useRecordPermissions="false"/>
+              <PartitionNavigators/>
+            </Page>
+            <MasterForeignKeyColumnMap>
+              <FieldMap foreginColumnName="cle_type_reference" masterColumnName="cle"/>
+            </MasterForeignKeyColumnMap>
+          </Detail>
+        </Details>
+        <RecordPermissions useRecordPermissions="false"/>
+        <PartitionNavigators/>
+      </Page>
+      <Page NavigatorPosition="2" addSeparator="false" caption="Infrastructure" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="infrastructure" groupName="Classifications" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="Infrastructure" showKeyColumnsImagesInGridHeader="false" tableName="public.infrastructure" type="table" useActionImages="true">
+        <BeforeGridText/>
+        <DetailedDescription/>
+        <ColumnPresentations>
+          <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+            <ViewProperties type="text">
+              <Format thousandSeparator="," type="number"/>
+            </ViewProperties>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Name" fieldName="nom" selectedFilterOperators="1589247" showColumnFilter="false">
+            <ViewProperties type="text"/>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Cle Plateforme" fieldName="cle_plateforme" selectedFilterOperators="1573119" showColumnFilter="false">
+            <ViewProperties type="text">
+              <Format thousandSeparator="," type="number"/>
+            </ViewProperties>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+        </ColumnPresentations>
+        <Columns>
+          <List>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_plateforme"/>
+          </List>
+          <View>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_plateforme"/>
+          </View>
+          <Edit>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_plateforme"/>
+          </Edit>
+          <Insert>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_plateforme"/>
+          </Insert>
+          <QuickFilter>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_plateforme"/>
+          </QuickFilter>
+          <FilterBuilder>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_plateforme"/>
+          </FilterBuilder>
+          <Print>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_plateforme"/>
+          </Print>
+          <Export>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_plateforme"/>
+          </Export>
+          <Compare>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom" visible="false"/>
+            <Column fieldName="cle_plateforme"/>
+          </Compare>
+        </Columns>
+        <Details>
+          <Detail caption="Equipement">
+            <Page NavigatorPosition="2" addSeparator="false" caption="Equipement" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="equipement" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="Equipement" showKeyColumnsImagesInGridHeader="false" tableName="public.equipement" type="table" useActionImages="true">
+              <BeforeGridText/>
+              <DetailedDescription/>
+              <ColumnPresentations>
+                <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Nom" fieldName="nom" selectedFilterOperators="1589247" showColumnFilter="false">
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Rangement" fieldName="cle_rangement" selectedFilterOperators="1573119" showColumnFilter="false">
+                  <ViewProperties type="text">
+                    <Format thousandSeparator="," type="number"/>
+                  </ViewProperties>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation canSetNull="true" caption="Photo" fieldName="photo" selectedFilterOperators="1589247" showColumnFilter="false">
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Etat" fieldName="cle_etat" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_etats" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation canSetNull="true" caption="Description" fieldName="description" selectedFilterOperators="1589247" showColumnFilter="false">
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Sous Categorie" fieldName="cle_sous_categorie" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_sous_categories" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+                <ColumnPresentation caption="Cle Infrastructure" fieldName="cle_infrastructure" selectedFilterOperators="1589247">
+                  <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.infrastructure" useLookupOrdering="true"/>
+                  <ViewProperties type="text"/>
+                  <EditProperties maxLength="0" type="textBox"/>
+                </ColumnPresentation>
+              </ColumnPresentations>
+              <Columns>
+                <List>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </List>
+                <View>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </View>
+                <Edit>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Edit>
+                <Insert>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Insert>
+                <QuickFilter>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </QuickFilter>
+                <FilterBuilder>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </FilterBuilder>
+                <Print>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Print>
+                <Export>
+                  <Column fieldName="cle"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Export>
+                <Compare>
+                  <Column fieldName="cle" visible="false"/>
+                  <Column fieldName="nom"/>
+                  <Column fieldName="cle_rangement"/>
+                  <Column fieldName="photo"/>
+                  <Column fieldName="cle_etat"/>
+                  <Column fieldName="description"/>
+                  <Column fieldName="cle_sous_categorie"/>
+                  <Column fieldName="cle_infrastructure"/>
+                </Compare>
+              </Columns>
+              <Details/>
+              <RecordPermissions useRecordPermissions="false"/>
+              <PartitionNavigators/>
+            </Page>
+            <MasterForeignKeyColumnMap>
+              <FieldMap foreginColumnName="cle_infrastructure" masterColumnName="cle"/>
+            </MasterForeignKeyColumnMap>
+          </Detail>
+        </Details>
+        <RecordPermissions useRecordPermissions="false"/>
+        <PartitionNavigators/>
+      </Page>
+      <Page NavigatorPosition="2" addSeparator="false" caption="Equipment" contentEncoding="UTF-8" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" fileName="req_equipement" horizontalFilterCondition="" insertAbilityMode="1" numberByDataSource="0" openAdvancedSearchAtFirst="false" printerFriendlyAvailable2="5" queryName="req_equipement" recordsPerPage="20" runtimeCustomizationAvailable="false" shortCaption="Equipment" showKeyColumnsImagesInGridHeader="false" type="query" useActionImages="true">
+        <BeforeGridText/>
+        <DetailedDescription/>
+        <ColumnPresentations>
+          <ColumnPresentation caption="Cle" fieldName="cle" selectedFilterOperators="1573119" showColumnFilter="false">
+            <ViewProperties type="text">
+              <Format thousandSeparator="," type="number"/>
+            </ViewProperties>
+            <EditProperties maxValue="100" minValue="0" step="1" type="spinEdit" useConstraints="false"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Name" fieldName="nom" selectedFilterOperators="1589247" showColumnFilter="false">
+            <ViewProperties type="text"/>
+            <EditProperties maxLength="0" type="textBox"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Cle Rangement" fieldName="cle_rangement" selectedFilterOperators="1573119" showColumnFilter="false">
+            <ViewProperties type="text">
+              <Format thousandSeparator="," type="number"/>
+            </ViewProperties>
+            <EditProperties maxValue="100" minValue="0" step="1" type="spinEdit" useConstraints="false"/>
+          </ColumnPresentation>
+          <ColumnPresentation canSetNull="true" caption="Photo" fieldName="photo" selectedFilterOperators="1589247" showColumnFilter="false">
+            <ViewProperties type="text"/>
+            <EditProperties acceptableFileTypes="image/*" directoryToUpload="photos" fileNameTemplate="%original_file_name%" generateRandomFileName="false" replaceFilesIfExists="true" thumbnailResizeType="0" type="imageUploadToFolder"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Status" fieldName="cle_etat" selectedFilterOperators="1573119">
+            <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_etats" useLookupOrdering="true"/>
+            <ViewProperties type="text"/>
+            <EditProperties type="comboBox"/>
+          </ColumnPresentation>
+          <ColumnPresentation canSetNull="true" caption="Description" fieldName="description" selectedFilterOperators="1589247" showColumnFilter="false">
+            <ViewProperties type="text"/>
+            <EditProperties type="htmlWysiwyg"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Product type" fieldName="cle_sous_categorie" selectedFilterOperators="1573119">
+            <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.n_sous_categories" useLookupOrdering="true"/>
+            <ViewProperties type="text"/>
+            <EditProperties type="multilevelautocomplete">
+              <Levels>
+                <Level caption="Family" captionFieldName="nom" childFieldName="cle_categorie" dataSourceName="public.n_categories" idFieldName="cle"/>
+              </Levels>
+            </EditProperties>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Cle Infrastructure" fieldName="cle_infrastructure" selectedFilterOperators="1573119">
+            <Lookup displayFieldName="nom" linkFieldName="cle" lookupFilter="" lookupOrdering="0" tableName="public.infrastructure" useLookupOrdering="true"/>
+            <ViewProperties type="text"/>
+            <EditProperties type="comboBox"/>
+          </ColumnPresentation>
+          <ColumnPresentation caption="Family" fieldName="cle_categorie" selectedFilterOperators="1573119" showColumnFilter="false">
+            <ViewProperties type="text">
+              <Format thousandSeparator="," type="number"/>
+            </ViewProperties>
+            <EditProperties maxValue="100" minValue="0" step="1" type="spinEdit" useConstraints="false"/>
+          </ColumnPresentation>
+        </ColumnPresentations>
+        <Columns>
+          <List>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_rangement"/>
+            <Column fieldName="photo"/>
+            <Column fieldName="cle_etat"/>
+            <Column fieldName="description"/>
+            <Column fieldName="cle_sous_categorie"/>
+            <Column fieldName="cle_infrastructure"/>
+            <Column fieldName="cle_categorie" visible="false"/>
+          </List>
+          <View>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_rangement"/>
+            <Column fieldName="photo"/>
+            <Column fieldName="cle_etat"/>
+            <Column fieldName="description"/>
+            <Column fieldName="cle_sous_categorie"/>
+            <Column fieldName="cle_infrastructure"/>
+            <Column fieldName="cle_categorie" visible="false"/>
+          </View>
+          <Edit>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_rangement"/>
+            <Column fieldName="photo"/>
+            <Column fieldName="cle_etat"/>
+            <Column fieldName="description"/>
+            <Column fieldName="cle_sous_categorie"/>
+            <Column fieldName="cle_infrastructure"/>
+            <Column fieldName="cle_categorie" visible="false"/>
+          </Edit>
+          <Insert>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_rangement"/>
+            <Column fieldName="photo"/>
+            <Column fieldName="cle_etat"/>
+            <Column fieldName="description"/>
+            <Column fieldName="cle_sous_categorie"/>
+            <Column fieldName="cle_infrastructure"/>
+            <Column fieldName="cle_categorie" visible="false"/>
+          </Insert>
+          <QuickFilter>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_rangement"/>
+            <Column fieldName="photo"/>
+            <Column fieldName="cle_etat"/>
+            <Column fieldName="description"/>
+            <Column fieldName="cle_sous_categorie"/>
+            <Column fieldName="cle_infrastructure"/>
+            <Column fieldName="cle_categorie"/>
+          </QuickFilter>
+          <FilterBuilder>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_rangement"/>
+            <Column fieldName="photo"/>
+            <Column fieldName="cle_etat"/>
+            <Column fieldName="description"/>
+            <Column fieldName="cle_sous_categorie"/>
+            <Column fieldName="cle_infrastructure"/>
+            <Column fieldName="cle_categorie"/>
+          </FilterBuilder>
+          <Print>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_rangement"/>
+            <Column fieldName="photo"/>
+            <Column fieldName="cle_etat"/>
+            <Column fieldName="description"/>
+            <Column fieldName="cle_sous_categorie"/>
+            <Column fieldName="cle_infrastructure"/>
+            <Column fieldName="cle_categorie" visible="false"/>
+          </Print>
+          <Export>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_rangement"/>
+            <Column fieldName="photo"/>
+            <Column fieldName="cle_etat"/>
+            <Column fieldName="description"/>
+            <Column fieldName="cle_sous_categorie"/>
+            <Column fieldName="cle_infrastructure"/>
+            <Column fieldName="cle_categorie" visible="false"/>
+          </Export>
+          <Compare>
+            <Column fieldName="cle" visible="false"/>
+            <Column fieldName="nom"/>
+            <Column fieldName="cle_rangement"/>
+            <Column fieldName="photo"/>
+            <Column fieldName="cle_etat"/>
+            <Column fieldName="description"/>
+            <Column fieldName="cle_sous_categorie"/>
+            <Column fieldName="cle_infrastructure"/>
+            <Column fieldName="cle_categorie" visible="false"/>
+          </Compare>
+        </Columns>
+        <Details/>
+        <RecordPermissions useRecordPermissions="false"/>
+        <PartitionNavigators/>
+      </Page>
+    </Pages>
+    <UserAuthorization/>
+    <UserGrants enableGuestAccess="false">
+      <UserPageGrants/>
+    </UserGrants>
+    <Header>
+&lt;h3&gt;Flexin&lt;/h3&gt;    </Header>
+    <Footer/>
+    <PHPOptions/>
+    <Groups>
+      <Group caption="No group"/>
+      <Group caption="Classifications"/>
+    </Groups>
+  </Presentation>
+  <UserCSS/>
+  <UserJS/>
+  <ExcludedPaths/>
+  <DefaultPageProperties NavigatorPosition="2" contentEncoding="UTF-8" deleteAbilityMode="3" deleteSelectedAbilityMode="3" exportToCsvAvailable2="5" exportToExcelAvailable2="5" exportToPdfAvailable2="5" exportToWordAvailable2="5" exportToXmlAvailable2="5" insertAbilityMode="1" printerFriendlyAvailable2="5" recordsPerPage="20" runtimeCustomizationAvailable="false" showKeyColumnsImagesInGridHeader="false" useActionImages="true"/>
+  <DefaultDataFormats DateFormat="d-m-Y" DateTimeFormat="d-m-Y H:i:s" DecimalSeparator="." ThousandSeparator="," firstDayOfWeek="1" numberAfterDecimal="4"/>
+  <ConnectionOptions host="localhost" port="5432" login="flexinuser" password="_O3]X/'V[&gt;O]Z@~~" database="flexin" client_encoding="">
+    <ssh_secure secure="false" port="22" authentication_mode="0"/>
+    <http_tunnel tunneling="false" url="">
+      <http_proxy_server use_proxy="false" port="8080"/>
+      <http_authentication/>
+    </http_tunnel>
+  </ConnectionOptions>
+  <ScriptConnectionOptions host="localhost" port="5432" login="flexinuser" password="_O3]X/'V[&gt;O]Z@~~" database="flexin" client_encoding="">
+    <ssh_secure secure="false" port="22" authentication_mode="0"/>
+    <http_tunnel tunneling="false" url="">
+      <http_proxy_server use_proxy="false" port="8080"/>
+      <http_authentication/>
+    </http_tunnel>
+  </ScriptConnectionOptions>
+  <Queries>
+    <Query name="req_equipement">
+      <SelectStatement>
+SELECT
+      equipement.cle,
+      equipement.nom,
+      cle_rangement,
+      photo,
+      cle_etat,
+      description,
+      n_categories.cle as cle_categorie,
+      cle_sous_categorie,
+      cle_infrastructure
+FROM
+    equipement,n_categories,n_sous_categories
+WHERE
+     equipement.cle_sous_categorie = n_sous_categories.cle
+AND  n_sous_categories.cle_categorie = n_categories.cle      </SelectStatement>
+      <InsertStatements>
+        <Statement>
+INSERT INTO equipement(
+nom,
+cle_rangement,
+photo,
+cle_etat,
+description,
+cle_sous_categorie,
+cle_infrastructure
+) VALUES(
+:nom,
+:cle_rangement,
+:photo,
+:cle_etat,
+:description,
+:cle_sous_categorie,
+:cle_infrastructure)        </Statement>
+      </InsertStatements>
+      <UpdateStatements>
+        <Statement>
+UPDATE 
+       equipement 
+SET
+    nom = :nom,
+    cle_rangement = :cle_rangement,
+    photo = :photo,
+    cle_etat = :cle_etat,
+    description = :description,
+    cle_sous_categorie = :cle_sous_categorie,
+    cle_infrastructure = :cle_infrastructure
+WHERE
+     cle = :cle        </Statement>
+      </UpdateStatements>
+      <DeleteStatements>
+        <Statement>
+DELETE FROM equipement WHERE cle = :cle        </Statement>
+      </DeleteStatements>
+      <PrimaryKeyFields>
+        <Field name="cle"/>
+      </PrimaryKeyFields>
+    </Query>
+  </Queries>
+</Project>
